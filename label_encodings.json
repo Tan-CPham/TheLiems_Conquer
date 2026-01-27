@@ -1,0 +1,110 @@
+{
+  "Attrition": {
+    "classes": [
+      "No",
+      "Yes"
+    ],
+    "mapping": {
+      "No": 0,
+      "Yes": 1
+    }
+  },
+  "BusinessTravel": {
+    "classes": [
+      "Non-Travel",
+      "Travel_Frequently",
+      "Travel_Rarely"
+    ],
+    "mapping": {
+      "Non-Travel": 0,
+      "Travel_Frequently": 1,
+      "Travel_Rarely": 2
+    }
+  },
+  "Department": {
+    "classes": [
+      "Human Resources",
+      "Research & Development",
+      "Sales"
+    ],
+    "mapping": {
+      "Human Resources": 0,
+      "Research & Development": 1,
+      "Sales": 2
+    }
+  },
+  "EducationField": {
+    "classes": [
+      "Human Resources",
+      "Life Sciences",
+      "Marketing",
+      "Medical",
+      "Other",
+      "Technical Degree"
+    ],
+    "mapping": {
+      "Human Resources": 0,
+      "Life Sciences": 1,
+      "Marketing": 2,
+      "Medical": 3,
+      "Other": 4,
+      "Technical Degree": 5
+    }
+  },
+  "Gender": {
+    "classes": [
+      "Female",
+      "Male"
+    ],
+    "mapping": {
+      "Female": 0,
+      "Male": 1
+    }
+  },
+  "JobRole": {
+    "classes": [
+      "Healthcare Representative",
+      "Human Resources",
+      "Laboratory Technician",
+      "Manager",
+      "Manufacturing Director",
+      "Research Director",
+      "Research Scientist",
+      "Sales Executive",
+      "Sales Representative"
+    ],
+    "mapping": {
+      "Healthcare Representative": 0,
+      "Human Resources": 1,
+      "Laboratory Technician": 2,
+      "Manager": 3,
+      "Manufacturing Director": 4,
+      "Research Director": 5,
+      "Research Scientist": 6,
+      "Sales Executive": 7,
+      "Sales Representative": 8
+    }
+  },
+  "MaritalStatus": {
+    "classes": [
+      "Divorced",
+      "Married",
+      "Single"
+    ],
+    "mapping": {
+      "Divorced": 0,
+      "Married": 1,
+      "Single": 2
+    }
+  },
+  "OverTime": {
+    "classes": [
+      "No",
+      "Yes"
+    ],
+    "mapping": {
+      "No": 0,
+      "Yes": 1
+    }
+  }
+}
