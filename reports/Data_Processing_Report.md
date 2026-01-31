@@ -30,7 +30,10 @@ Trước khi đưa vào mô hình, nhóm đã thực hiện phân tích khám ph
 
     \* **Tình trạng hôn nhân (MaritalStatus):** Nhóm độc thân (Single) có tỷ lệ nghỉ việc cao hơn nhóm đã kết hôn hoặc ly hôn.
     ![Attrition Drivers](figures/attrition_drivers.jpg)
-**\*Hình 2:** Phân tích các yếu tố chính tác động đến quyết định nghỉ việc (Attrition Drivers). Kết quả cho thấy **Làm thêm giờ (OverTime)**, **Thu nhập thấp**, **Tuổi đời trẻ** và **Độc thân** là những nguyên nhân hàng đầu.\*
+
+    <p align="center">
+  Hình 2: Phân tích các yếu tố chính tác động đến quyết định nghỉ việc (Attrition Drivers). Kết quả cho thấy **Làm thêm giờ (OverTime)**, **Thu nhập thấp**, **Tuổi đời trẻ** và **Độc thân** là những nguyên nhân hàng đầu.
+    </p>
 
 - **Tương quan biến (Correlation Analysis):**
 
