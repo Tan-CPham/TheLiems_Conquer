@@ -251,6 +251,7 @@ marital_status = st.selectbox(
 #### b. UI hiển thị kết quả dự đoán
 
 ![UI kết quả 2 mô hình](figures/Output.jpg)
+
 Giao diện được chia thành hai cột song song bằng cách sử dụng st.columns(2):
 
 Cột 1: Hiển thị kết quả của mô hình Random Forest
