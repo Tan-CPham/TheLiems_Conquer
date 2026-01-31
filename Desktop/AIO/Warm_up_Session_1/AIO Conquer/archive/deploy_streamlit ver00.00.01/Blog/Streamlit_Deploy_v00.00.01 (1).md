@@ -48,8 +48,9 @@ pip install joblib
 ![Input của user](Feature/Picture4.jpg)
 
 Để xây dụng được UI như thế này, ta cần chia thành 2 cột:
-
+```python
 col1, col2 = st.columns(2)
+```
 
 Với cột bên trái, ta cần hiện thị các input của biến ‘age’, ‘Monthly Income’, ‘Total Working Years’
 
