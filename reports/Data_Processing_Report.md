@@ -28,6 +28,7 @@ Trước khi đưa vào mô hình, nhóm đã thực hiện phân tích khám ph
     - **Tuổi & Thâm niên:** Nhóm nhân viên trẻ (dưới 30 tuổi) và thâm niên thấp (TotalWorkingYears thấp) có xu hướng nhảy việc cao nhất.
 
     - **Tình trạng hôn nhân (MaritalStatus):** Nhóm độc thân (Single) có tỷ lệ nghỉ việc cao hơn nhóm đã kết hôn hoặc ly hôn.
+    
     ![Attrition Drivers](figures/attrition_drivers.jpg)
 
   <p align="center">
@@ -36,9 +37,9 @@ Trước khi đưa vào mô hình, nhóm đã thực hiện phân tích khám ph
 
 - **Tương quan biến (Correlation Analysis):**
 
-    \* Phát hiện hiện tượng đa cộng tuyến mạnh (~0.95) giữa MonthlyIncome và JobLevel.
+    - Phát hiện hiện tượng đa cộng tuyến mạnh (~0.95) giữa MonthlyIncome và JobLevel.
 
-    \* _Quyết định:_ Loại bỏ JobLevel và giữ lại MonthlyIncome vì biến liên tục mang lại nhiều thông tin chi tiết hơn.
+    - _Quyết định:_ Loại bỏ JobLevel và giữ lại MonthlyIncome vì biến liên tục mang lại nhiều thông tin chi tiết hơn.
     ![Ma trận tương quan](figures/correlation_matrix.jpg)
 
 <p align="center">
