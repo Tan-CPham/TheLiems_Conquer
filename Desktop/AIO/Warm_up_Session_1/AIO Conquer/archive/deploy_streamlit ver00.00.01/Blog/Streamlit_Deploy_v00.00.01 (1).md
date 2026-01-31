@@ -47,6 +47,12 @@ pip install joblib
 
 ![Input của user](Feature/Picture4.jpg)
 
+Để xây dụng được UI như thế này, ta cần chia thành 2 cột:
+
+col1, col2 = st.columns(2)
+
+Với cột bên trái, ta cần hiện thị các input của biến ‘age’, ‘Monthly Income’, ‘Total Working Years’
+
 ``` python
 col1, col2 = st.columns(2)
 
@@ -54,7 +60,9 @@ with col1:
     age = st.number_input("Age", min_value=18, max_value=65, value=30)
     monthly_income = st.number_input("Monthly Income", min_value=1000, max_value=20000, value=5000)
     total_working_years = st.number_input("Total Working Years", min_value=0, max_value=40, value=5)
-
+```
+Với cột bên phải, ta cần hiện thị các input của biến ‘Year at Company’, ‘Over Time’, ‘Mức độ hài với công việc.
+```python
 with col2:
     years_at_company = st.number_input("Years at Company", min_value=0, max_value=40, value=3)
     overtime = st.selectbox("Works Overtime?", ["No", "Yes"])
