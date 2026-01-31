@@ -22,7 +22,6 @@ Trước khi đưa vào mô hình, nhóm đã thực hiện phân tích khám ph
 - **Các yếu tố tác động chính (Key Drivers):**
 
     \* **Làm thêm giờ (OverTime):** Nhân viên có làm thêm giờ (Yes) có tỷ lệ nghỉ việc cao vượt trội (gấp ~3 lần nhóm không làm thêm).
-
  
     \* **Thu nhập (MonthlyIncome):** Biểu đồ Boxplot cho thấy nhóm nghỉ việc có mức lương trung vị thấp hơn đáng kể so với nhóm ở lại.
 
@@ -32,7 +31,7 @@ Trước khi đưa vào mô hình, nhóm đã thực hiện phân tích khám ph
     ![Attrition Drivers](figures/attrition_drivers.jpg)
 
   <p align="center">
-  Hình 2: Phân tích các yếu tố chính tác động đến quyết định nghỉ việc (Attrition Drivers). Kết quả cho thấy **Làm thêm giờ (OverTime)**, **Thu nhập thấp**, **Tuổi đời trẻ** và **Độc thân** là những nguyên nhân hàng đầu.
+  Hình 2: Phân tích các yếu tố chính tác động đến quyết định nghỉ việc (Attrition Drivers). Kết quả cho thấy Làm thêm giờ (OverTime), Thu nhập thấp, Tuổi đời trẻ và Độc thân là những nguyên nhân hàng đầu.
   </p>
 
 - **Tương quan biến (Correlation Analysis):**
