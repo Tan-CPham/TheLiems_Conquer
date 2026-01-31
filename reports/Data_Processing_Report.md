@@ -47,6 +47,7 @@ Trước khi đưa vào mô hình, nhóm đã thực hiện phân tích khám ph
 <p align="center">
   Hình 3: Ma trận tương quan giữa các biến
 </p>
+
 ## 1.3. Tiền xử lý dữ liệu
 
 Dựa trên kết quả EDA, quy trình tiền xử lý được thực hiện qua 5 bước:
