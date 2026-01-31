@@ -45,8 +45,7 @@ pip install joblib
 
 #### a. Phần Input của người dùng
 
-![Input của user](Feature
-/Picture4.jpg)
+![Input của user](Feature/Picture4.jpg)
 
 ``` python
 col1, col2 = st.columns(2)
