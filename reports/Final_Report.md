@@ -24,6 +24,7 @@ Phát triển ứng dụng Web (Streamlit) tích hợp mô hình Machine Learnin
   <br>
   <i>Hình 1: Pipeline tổng quan cho dự án</i>
 </div>
+
 ## 2.1. Khởi tạo và chuẩn bị dữ liệu
 
 -   Nguồn dữ liệu: Bộ dữ liệu mẫu IBM HR Analytics Employee Attrition & Performance (định dạng CSV) chứa hồ sơ nhân sự tổng hợp, bao gồm thông tin nhân khẩu học, mức lương và lịch sử làm việc của 1.470 nhân viên (với 35 thuộc tính đặc trưng) .
