@@ -20,7 +20,7 @@ Phát triển ứng dụng Web (Streamlit) tích hợp mô hình Machine Learnin
 # PHẦN 2. QUY TRÌNH THỰC HIỆN
 
 <div align="center">
-  <img src="pipeline.jpg" width="80%">
+  <img src="figures/pipeline.jpg" width="80%">
   <br>
   <i>Hình 1: Pipeline tổng quan cho dự án</i>
 </div>
