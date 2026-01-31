@@ -15,7 +15,9 @@ Trước khi đưa vào mô hình, nhóm đã thực hiện phân tích khám ph
 - **Mất cân bằng dữ liệu (Imbalanced Data):** Biến mục tiêu `Attrition` phân bố rất lệch: 16.1% Nghỉ việc (Yes) so với 83.9% Ở lại (No).
 
 ![Phân bố Attrion](figures/attrition_rate.jpg)
-_Hình 1: Phân bố Attrion_
+<p align="center">
+  Hình 1: Phân bố Attrion.
+</p>
 
 - **Các yếu tố tác động chính (Key Drivers):**
 
