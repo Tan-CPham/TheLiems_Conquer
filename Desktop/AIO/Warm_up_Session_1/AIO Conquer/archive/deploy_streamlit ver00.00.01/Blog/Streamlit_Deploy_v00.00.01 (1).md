@@ -45,8 +45,8 @@ pip install joblib
 
 #### a. Phần Input của người dùng
 
-![Input của user](Desktop/AIO/Warm_up_Session_1/AIO Conquer/archive/deploy_streamlit ver00.00.01/Blog/Feature)
-
+![Input của user](Feature
+/Picture4.jpg)
 
 ``` python
 col1, col2 = st.columns(2)
