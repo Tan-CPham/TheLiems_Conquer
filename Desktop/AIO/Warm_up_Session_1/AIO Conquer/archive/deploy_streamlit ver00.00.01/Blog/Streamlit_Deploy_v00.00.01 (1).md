@@ -76,7 +76,7 @@ marital_status = st.selectbox(
 
 #### b. UI hiển thị kết quả dự đoán
 
-![UI kết quả 2 mô hình](C:\Users\ACER\Desktop\AIO\Warm_up_Session_1\AIO Conquer\archive\deploy_streamlit ver00.00.01\Blog\Feature\Output.jpg)
+![UI kết quả 2 mô hình](Feature/Output.jpg)
 
 Về phần này, UI sẽ cho ta thấy sự khác biệt của mô hình khi dự đoán hai kết quả khác nhau
 
