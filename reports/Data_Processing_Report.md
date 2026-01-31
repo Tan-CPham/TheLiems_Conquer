@@ -115,6 +115,7 @@ X_test[numeric_cols] = scaler.transform(X_test[numeric_cols])
 <p align="center">
   Hình 4: Trước và sau khi chuẩn hóa dữ liệu
 </p>
+
 5. **Xử lý mất cân bằng (Imbalance Handling):**
 
 - Tập dữ liệu huấn luyện (Train set) ban đầu bị lệch nghiêm trọng về phía lớp nhân viên "Ở lại" (Class 0), khiến mô hình dễ bỏ sót các trường hợp nhân viên "Nghỉ việc" (Class 1). Nhóm sử dụng thuật toán SMOTE để sinh thêm các dữ liệu giả lập (synthetic data) cho lớp thiểu số dựa trên nguyên lý láng giềng gần nhất (k-NN) trong không gian vector đã chuẩn hóa. Kết quả là số lượng mẫu của hai lớp trở nên cân bằng (50/50), giúp mô hình học được các đặc trưng của nhóm nghỉ việc tốt hơn và tránh hiện tượng thiên vị (bias) về nhóm đa số.
@@ -129,6 +130,7 @@ X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
 <p align="center">
   Hình 5: Trước và sau khi xử lý thêm dữ liệu
 </p>
+
 # 2. Mô tả dữ liệu
 
 Sau quá trình chọn lọc, bộ dữ liệu cuối cùng đưa vào huấn luyện bao gồm 8 cột sau:
