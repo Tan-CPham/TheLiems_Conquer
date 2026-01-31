@@ -4,7 +4,7 @@
 
 # PHẦN 1. TỔNG QUAN VÀ ĐẶT VẤN ĐỀ
 
-# 1.1. Đặt vấn đề
+## 1.1. Đặt vấn đề
 
 Biến động nhân sự gây tốn kém chi phí lớn cho doanh nghiệp. Thay vì phản ứng thụ động, dự án xây dựng công cụ **dự báo sớm** rủi ro nghỉ việc dựa trên dữ liệu lịch sử, giúp nhà quản lý có chiến lược giữ chân nhân tài chủ động.
 
