@@ -45,7 +45,7 @@ pip install joblib
 
 #### a. Phần Input của người dùng
 
-![Input của user](Desktop/AIO/Warm_up_Session_1/AIO Conquer/archive/deploy_streamlit ver00.00.01/Blog/Feature/User_input.jpeg.png)
+![Input của user](Desktop/AIO/Warm_up_Session_1/AIO Conquer/archive/deploy_streamlit ver00.00.01/Blog/Feature)
 
 
 ``` python
