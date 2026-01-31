@@ -73,7 +73,8 @@ Trước khi đưa vào mô hình, nhóm đã thực hiện phân tích khám ph
 <p align="center">
   Hình 3: Ma trận tương quan giữa các biến
 </p>
-## 1.3. Tiền xử lý dữ liệu
+
+## 2.3. Tiền xử lý dữ liệu
 
 Dựa trên kết quả EDA, quy trình tiền xử lý được thực hiện qua 5 bước:
 
@@ -156,6 +157,7 @@ X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
 <p align="center">
   Hình 5: Trước và sau khi xử lý thêm dữ liệu
 </p>
+
 # 2. Mô tả dữ liệu
 
 Sau quá trình chọn lọc, bộ dữ liệu cuối cùng đưa vào huấn luyện bao gồm 8 cột sau:
