@@ -40,6 +40,7 @@ Trước khi đưa vào mô hình, nhóm đã thực hiện phân tích khám ph
     - Phát hiện hiện tượng đa cộng tuyến mạnh (~0.95) giữa MonthlyIncome và JobLevel.
 
     - _Quyết định:_ Loại bỏ JobLevel và giữ lại MonthlyIncome vì biến liên tục mang lại nhiều thông tin chi tiết hơn.
+    
     ![Ma trận tương quan](figures/correlation_matrix.jpg)
 
 <p align="center">
