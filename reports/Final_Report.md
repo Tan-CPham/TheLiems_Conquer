@@ -1,6 +1,24 @@
-# 1. Quy trình thực hiện
 
-## 1.1. Khởi tạo và chuẩn bị dữ liệu
+# PROJECT WARMUP ĐỢT 1:  DỰ BÁO RỦI RO NGHỈ VIỆC CỦA NHÂN SỰ
+
+**Mô hình đề xuất: Random Forest và Logistic Regression**
+# PHẦN 1. TỔNG QUAN VÀ ĐẶT VẤN ĐỀ
+# 1.1. Đặt vấn đề
+Biến động nhân sự gây tốn kém chi phí lớn cho doanh nghiệp. Thay vì phản ứng thụ động, dự án xây dựng công cụ **dự báo sớm** rủi ro nghỉ việc dựa trên dữ liệu lịch sử, giúp nhà quản lý có chiến lược giữ chân nhân tài chủ động.
+## 1.2. Giải pháp đề xuất
+Phát triển ứng dụng Web (Streamlit) tích hợp mô hình Machine Learning (Random Forest & Logistic Regression). Hệ thống được tối ưu hóa chỉ với **7 chỉ số đầu vào** cốt lõi (Lương, OT, Tuổi...), giúp việc dự báo diễn ra nhanh chóng và chính xác.
+## 1.3. Thách thức kỹ thuật
+- **Mất cân bằng dữ liệu (Imbalanced Data):** Tỷ lệ nghỉ việc thực tế rất thấp (16.1%). Nhóm đã sử dụng kỹ thuật **SMOTE** để sinh dữ liệu nhân tạo, giúp mô hình không bị thiên vị nhóm đa số.
+- **Đánh đổi giữa Độ chính xác và Tiện dụng:** Việc nhập 35 trường thông tin là quá tải với người dùng. Nhóm đã thực hiện **Feature Selection** để chọn ra 7 biến quan trọng nhất, đảm bảo ứng dụng gọn nhẹ nhưng vẫn duy trì hiệu suất dự báo cao.
+
+# PHẦN 2. QUY TRÌNH THỰC HIỆN
+
+<div align="center">
+  <img src="pipeline.jpg" width="80%">
+  <br>
+  <i>Hình 1: Pipeline tổng quan cho dự án</i>
+</div>
+## 2.1. Khởi tạo và chuẩn bị dữ liệu
 
 -   Nguồn dữ liệu: Bộ dữ liệu mẫu IBM HR Analytics Employee Attrition & Performance (định dạng CSV) chứa hồ sơ nhân sự tổng hợp, bao gồm thông tin nhân khẩu học, mức lương và lịch sử làm việc của 1.470 nhân viên (với 35 thuộc tính đặc trưng) .
 
@@ -8,21 +26,19 @@
 
 ![Read Data](figures/read_data.jpg)
 
-## 1.2. Khám phá dữ liệu (EDA) và chọn lọc đặc trưng
+## 2.2. Khám phá dữ liệu (EDA) và chọn lọc đặc trưng
 
 Trước khi đưa vào mô hình, nhóm đã thực hiện phân tích khám phá trên toàn bộ 35 thuộc tính và rút ra các nhận định quan trọng:
 
 - **Mất cân bằng dữ liệu (Imbalanced Data):** Biến mục tiêu `Attrition` phân bố rất lệch: 16.1% Nghỉ việc (Yes) so với 83.9% Ở lại (No).
 
 ![Phân bố Attrion](figures/attrition_rate.jpg)
-
 <p align="center">
   Hình 1: Phân bố Attrion.
 </p>
 - **Các yếu tố tác động chính (Key Drivers):**
 
     - **Làm thêm giờ (OverTime):** Nhân viên có làm thêm giờ (Yes) có tỷ lệ nghỉ việc cao vượt trội (gấp ~3 lần nhóm không làm thêm).
-
  
     - **Thu nhập (MonthlyIncome):** Biểu đồ Boxplot cho thấy nhóm nghỉ việc có mức lương trung vị thấp hơn đáng kể so với nhóm ở lại.
 
@@ -30,7 +46,6 @@ Trước khi đưa vào mô hình, nhóm đã thực hiện phân tích khám ph
 
     - **Tình trạng hôn nhân (MaritalStatus):** Nhóm độc thân (Single) có tỷ lệ nghỉ việc cao hơn nhóm đã kết hôn hoặc ly hôn.
     ![Attrition Drivers](figures/attrition_drivers.jpg)
-
 <p align="center">
   Hình 2: Phân tích các yếu tố chính tác động đến quyết định nghỉ việc (Attrition Drivers). Kết quả cho thấy Làm thêm giờ (OverTime), Thu nhập thấp, Tuổi đời trẻ và Độc thân là những nguyên nhân hàng đầu.
   </p>
@@ -41,11 +56,10 @@ Trước khi đưa vào mô hình, nhóm đã thực hiện phân tích khám ph
 
     - _Quyết định:_ Loại bỏ JobLevel và giữ lại MonthlyIncome vì biến liên tục mang lại nhiều thông tin chi tiết hơn.
     ![Ma trận tương quan](figures/correlation_matrix.jpg)
-
 <p align="center">
   Hình 3: Ma trận tương quan giữa các biến
 </p>
-## 1.3. Tiền xử lý dữ liệu
+## 2.3. Tiền xử lý dữ liệu
 
 Dựa trên kết quả EDA, quy trình tiền xử lý được thực hiện qua 5 bước:
 
@@ -109,7 +123,6 @@ X_test[numeric_cols] = scaler.transform(X_test[numeric_cols])
 ```
 
 ![Chuẩn hóa dữ liệu](figures/scaling_data.jpg)
-
 <p align="center">
   Hình 4: Trước và sau khi chuẩn hóa dữ liệu
 </p>
@@ -123,11 +136,10 @@ X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
 ```
 
 ![Xử lý mất cân bằng](figures/smote_data_train.jpg)
-
 <p align="center">
   Hình 5: Trước và sau khi xử lý thêm dữ liệu
 </p>
-# 2. Mô tả dữ liệu
+## 2.4 Mô tả dữ liệu
 
 Sau quá trình chọn lọc, bộ dữ liệu cuối cùng đưa vào huấn luyện bao gồm 8 cột sau:
 
@@ -140,3 +152,141 @@ Sau quá trình chọn lọc, bộ dữ liệu cuối cùng đưa vào huấn lu
 | 5   | YearsAtCompany    | Numerical (Int) | Feature | Số năm thâm niên tại công ty hiện tại.                                                           |
 | 6   | JobSatisfaction   | Ordinal (1-4)   | Feature | Mức độ hài lòng với công việc hiện tại. Thang đo: 1 (Thấp) đến 4 (Rất cao).                      |
 | 7   | MaritalStatus     | Nominal         | Feature | Tình trạng hôn nhân (Single/Married/Divorced). Nhóm Single thường có khả năng nghỉ việc cao hơn. |
+
+# PHẦN 3. HUẤN LUYỆN VÀ ĐÁNH GIÁ MÔ HÌNH
+
+
+
+# PHẦN 4. TRIỂN KHAI ỨNG DỤNG
+
+## 4.1. Giới thiệu về Deploy mô hình Machine Learning
+Sau khi hoàn thành quá trình xử lý dữ liệu và xây dựng mô hình Machine Learning, bước tiếp theo là triển khai (deploy) mô hình thành một ứng dụng thực tế để người dùng có thể sử dụng. Việc deploy giúp mô hình không chỉ dừng lại ở mức thử nghiệm mà có thể áp dụng vào thực tế, hỗ
+trợ dự đoán hoặc ra quyết định.
+
+Trong dự án này, nhóm sử dụng Streamlit để triển khai mô hình. Streamlit là một framework Python cho phép xây dựng giao diện web đơn giản và nhanh chóng dành cho các ứng dụng Data Science và Machine Learning.
+
+## 4.2. Lý do lựa chọn Streamlit
+Streamlit được lựa chọn do các ưu điểm sau:
+-   **Dễ sử dụng:** Không yêu cầu kiến thức chuyên sâu về Front-end.
+-   **Tích hợp tốt với Python:** Phù hợp với các mô hình Machine Learning đã được xây dựng bằng Python.
+-   **Triển khai nhanh:** Chỉ cần viết vài dòng lệnh là có thể tạo giao diện web.
+-   **Hỗ trợ visualization:** Có thể hiển thị biểu đồ và kết quả phân tích trực quan.
+
+## 4.3. Quy trình triển khai ứng dụng Streamlit
+
+### 4.3.1 Cài đặt các thư viện cần thiết
+
+``` bash
+pip install streamlit
+pip install scikit-learn
+pip install pandas
+pip install joblib
+```
+### 4.3.2 Xây dựng UI
+
+#### a. Phần Input của người dùng
+
+![Input của user](figures/Picture4.jpg)
+
+Để xây dụng được UI như thế này, ta cần chia thành 2 cột:
+```python
+col1, col2 = st.columns(2)
+```
+
+Với cột bên trái, ta cần hiện thị các input của biến ‘age’, ‘Monthly Income’, ‘Total Working Years’
+
+``` python
+col1, col2 = st.columns(2)
+
+with col1:
+    age = st.number_input("Age", min_value=18, max_value=65, value=30)
+    monthly_income = st.number_input("Monthly Income", min_value=1000, max_value=20000, value=5000)
+    total_working_years = st.number_input("Total Working Years", min_value=0, max_value=40, value=5)
+```
+Với cột bên phải, ta cần hiện thị các input của biến ‘Year at Company’, ‘Over Time’, ‘Mức độ hài với công việc.
+```python
+with col2:
+    years_at_company = st.number_input("Years at Company", min_value=0, max_value=40, value=3)
+    overtime = st.selectbox("Works Overtime?", ["No", "Yes"])
+    job_satisfaction = st.slider(
+        "Job Satisfaction",
+        min_value=1,
+        max_value=4,
+        value=3,
+        help="1: Low, 2: Medium, 3: High, 4: Very High"
+    )
+
+marital_status = st.selectbox(
+    "Marital Status",
+    ["Single", "Married", "Divorced"]
+)
+```
+
+------------------------------------------------------------------------
+
+#### b. UI hiển thị kết quả dự đoán
+
+![UI kết quả 2 mô hình](figures/Output.jpg)
+Giao diện được chia thành hai cột song song bằng cách sử dụng st.columns(2):
+
+Cột 1: Hiển thị kết quả của mô hình Random Forest
+
+Cột 2: Hiển thị kết quả của mô hình Logistic Regression
+
+Cách bố trí này giúp người dùng có thể so sánh hai mô hình một cách trực quan và thuận tiện.
+
+``` python
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("Random Forest")
+    if rf_prediction == 1:
+        st.error(f"{rf_result}")
+    else:
+        st.success(f"### {rf_result}")
+    st.markdown(f"**Confidence:** {rf_conf:.2f}%")
+
+    st.markdown("#### Probabilities")
+    st.metric("Stay", f"{rf_probabilities[0]*100:.2f}%")
+    st.metric("Leave", f"{rf_probabilities[1]*100:.2f}%")
+
+    st.progress(float(rf_probabilities[1]))
+    leave_prob_rf = rf_probabilities[1] * 100
+    if leave_prob_rf < 30:
+        st.markdown(f":green[Low Risk: {leave_prob_rf:.1f}%]")
+    elif leave_prob_rf < 60:
+        st.markdown(f":orange[Medium Risk: {leave_prob_rf:.1f}%]")
+    else:
+        st.markdown(f":red[High Risk: {leave_prob_rf:.1f}%]")
+
+with col2:
+    st.subheader("Logistic Regression")
+    if lr_prediction == 1:
+        st.error(f"### {lr_result}")
+    else:
+        st.success(f"### {lr_result}")
+    st.markdown(f"**Confidence:** {lr_conf:.2f}%")
+
+    st.markdown("#### Probabilities")
+    st.metric("Stay", f"{lr_probabilities[0]*100:.2f}%")
+    st.metric("Leave", f"{lr_probabilities[1]*100:.2f}%")
+
+    st.progress(float(lr_probabilities[1]))
+```
+
+------------------------------------------------------------------------
+
+## 4.4 Hạn chế và hướng phát triển
+
+### Hạn chế
+
+-   Giao diện Streamlit còn đơn giản
+-   Khả năng xử lý dữ liệu lớn còn hạn chế
+-   Chưa tối ưu hiệu suất mô hình
+
+### Hướng phát triển
+
+-   Tối ưu giao diện người dùng
+-   Tích hợp nhiều mô hình dự đoán
+-   Triển khai trên server để phục vụ nhiều người dùng đồng thời
+-   Triển khai trên cloud để cho mọi người khác sử dụng thử mô hình (Hugging Face)
