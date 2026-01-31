@@ -94,7 +94,7 @@ selected_columns = [
         'MaritalStatus'        # Feature 7
     ]
 
-df_reduce = df[selected_columns]
+df = df[selected_columns]
 ```
 
 2.   **Mã hóa đặc trưng (Encoding):**
@@ -102,9 +102,9 @@ df_reduce = df[selected_columns]
 - Binary Encoding: Chuyển Attrition (Yes/No) $\rightarrow$ (1/0); OverTime (Yes/No) $\rightarrow$ (1/0).
 
 ```
-df_reduce['Attrition'] = df_reduce['Attrition'].apply(lambda x: 1 if x == 'Yes' else 0)
+df['Attrition'] = df['Attrition'].apply(lambda x: 1 if x == 'Yes' else 0)
 
-df_reduce['OverTime'] = df_reduce['OverTime'].apply(lambda x: 1 if x == 'Yes' else 0)
+df['OverTime'] = df['OverTime'].apply(lambda x: 1 if x == 'Yes' else 0)
 ```
 
 - One-Hot Encoding: Áp dụng cho biến định danh MaritalStatus. Sử dụng tham số drop_first=True để tránh bẫy đa cộng tuyến (Dummy Variable Trap), chỉ giữ lại cột \_Married và \_Single (nếu cả 2 bằng 0 thì hiểu là Divorced).
