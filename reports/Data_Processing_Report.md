@@ -15,29 +15,36 @@ Trước khi đưa vào mô hình, nhóm đã thực hiện phân tích khám ph
 - **Mất cân bằng dữ liệu (Imbalanced Data):** Biến mục tiêu `Attrition` phân bố rất lệch: 16.1% Nghỉ việc (Yes) so với 83.9% Ở lại (No).
 
 ![Phân bố Attrion](figures/attrition_rate.jpg)
-_Hình 1: Phân bố Attrion_
 
+<p align="center">
+  Hình 1: Phân bố Attrion.
+</p>
 - **Các yếu tố tác động chính (Key Drivers):**
 
-    \* **Làm thêm giờ (OverTime):** Nhân viên có làm thêm giờ (Yes) có tỷ lệ nghỉ việc cao vượt trội (gấp ~3 lần nhóm không làm thêm).
+    - **Làm thêm giờ (OverTime):** Nhân viên có làm thêm giờ (Yes) có tỷ lệ nghỉ việc cao vượt trội (gấp ~3 lần nhóm không làm thêm).
 
  
-    \* **Thu nhập (MonthlyIncome):** Biểu đồ Boxplot cho thấy nhóm nghỉ việc có mức lương trung vị thấp hơn đáng kể so với nhóm ở lại.
+    - **Thu nhập (MonthlyIncome):** Biểu đồ Boxplot cho thấy nhóm nghỉ việc có mức lương trung vị thấp hơn đáng kể so với nhóm ở lại.
 
-    \* **Tuổi & Thâm niên:** Nhóm nhân viên trẻ (dưới 30 tuổi) và thâm niên thấp (TotalWorkingYears thấp) có xu hướng nhảy việc cao nhất.
+    - **Tuổi & Thâm niên:** Nhóm nhân viên trẻ (dưới 30 tuổi) và thâm niên thấp (TotalWorkingYears thấp) có xu hướng nhảy việc cao nhất.
 
-    \* **Tình trạng hôn nhân (MaritalStatus):** Nhóm độc thân (Single) có tỷ lệ nghỉ việc cao hơn nhóm đã kết hôn hoặc ly hôn.
+    - **Tình trạng hôn nhân (MaritalStatus):** Nhóm độc thân (Single) có tỷ lệ nghỉ việc cao hơn nhóm đã kết hôn hoặc ly hôn.
     ![Attrition Drivers](figures/attrition_drivers.jpg)
-**\*Hình 2:** Phân tích các yếu tố chính tác động đến quyết định nghỉ việc (Attrition Drivers). Kết quả cho thấy **Làm thêm giờ (OverTime)**, **Thu nhập thấp**, **Tuổi đời trẻ** và **Độc thân** là những nguyên nhân hàng đầu.\*
+
+<p align="center">
+  Hình 2: Phân tích các yếu tố chính tác động đến quyết định nghỉ việc (Attrition Drivers). Kết quả cho thấy Làm thêm giờ (OverTime), Thu nhập thấp, Tuổi đời trẻ và Độc thân là những nguyên nhân hàng đầu.
+  </p>
 
 - **Tương quan biến (Correlation Analysis):**
 
-    \* Phát hiện hiện tượng đa cộng tuyến mạnh (~0.95) giữa MonthlyIncome và JobLevel.
+    - Phát hiện hiện tượng đa cộng tuyến mạnh (~0.95) giữa MonthlyIncome và JobLevel.
 
-    \* _Quyết định:_ Loại bỏ JobLevel và giữ lại MonthlyIncome vì biến liên tục mang lại nhiều thông tin chi tiết hơn.
+    - _Quyết định:_ Loại bỏ JobLevel và giữ lại MonthlyIncome vì biến liên tục mang lại nhiều thông tin chi tiết hơn.
     ![Ma trận tương quan](figures/correlation_matrix.jpg)
-_Hình 3: Ma trận tương quan giữa các biến_
 
+<p align="center">
+  Hình 3: Ma trận tương quan giữa các biến
+</p>
 ## 1.3. Tiền xử lý dữ liệu
 
 Dựa trên kết quả EDA, quy trình tiền xử lý được thực hiện qua 5 bước:
@@ -101,6 +108,25 @@ X_train[numeric_cols] = scaler.fit_transform(X_train[numeric_cols])
 X_test[numeric_cols] = scaler.transform(X_test[numeric_cols])
 ```
 
+![Chuẩn hóa dữ liệu](figures/scaling_data.jpg)
+
+<p align="center">
+  Hình 4: Trước và sau khi chuẩn hóa dữ liệu
+</p>
+5. **Xử lý mất cân bằng (Imbalance Handling):**
+
+- Tập dữ liệu huấn luyện (Train set) ban đầu bị lệch nghiêm trọng về phía lớp nhân viên "Ở lại" (Class 0), khiến mô hình dễ bỏ sót các trường hợp nhân viên "Nghỉ việc" (Class 1). Nhóm sử dụng thuật toán SMOTE để sinh thêm các dữ liệu giả lập (synthetic data) cho lớp thiểu số dựa trên nguyên lý láng giềng gần nhất (k-NN) trong không gian vector đã chuẩn hóa. Kết quả là số lượng mẫu của hai lớp trở nên cân bằng (50/50), giúp mô hình học được các đặc trưng của nhóm nghỉ việc tốt hơn và tránh hiện tượng thiên vị (bias) về nhóm đa số.
+
+```
+smote = SMOTE(random_state=42)
+X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
+```
+
+![Xử lý mất cân bằng](figures/smote_data_train.jpg)
+
+<p align="center">
+  Hình 5: Trước và sau khi xử lý thêm dữ liệu
+</p>
 # 2. Mô tả dữ liệu
 
 Sau quá trình chọn lọc, bộ dữ liệu cuối cùng đưa vào huấn luyện bao gồm 8 cột sau:
