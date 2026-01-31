@@ -86,8 +86,13 @@ marital_status = st.selectbox(
 #### b. UI hiển thị kết quả dự đoán
 
 ![UI kết quả 2 mô hình](Feature/Output.jpg)
+Giao diện được chia thành hai cột song song bằng cách sử dụng st.columns(2):
 
-Về phần này, UI sẽ cho ta thấy sự khác biệt của mô hình khi dự đoán hai kết quả khác nhau
+Cột 1: Hiển thị kết quả của mô hình Random Forest
+
+Cột 2: Hiển thị kết quả của mô hình Logistic Regression
+
+Cách bố trí này giúp người dùng có thể so sánh hai mô hình một cách trực quan và thuận tiện.
 
 ``` python
 col1, col2 = st.columns(2)
