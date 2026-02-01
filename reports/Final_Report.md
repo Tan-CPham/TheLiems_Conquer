@@ -228,7 +228,7 @@ def train_random_forest(X_train, y_train):
     model.fit(X_train, y_train)
     return model
 ```
-## 3.2 Đánh giá Hiệu suất (Model Evaluation)
+## 3.2. Đánh giá Hiệu suất (Model Evaluation)
 
 Việc đánh giá được thực hiện trên tập kiểm thử (X_test, y_test) - tập dữ liệu hoàn toàn mới mà mô hình chưa từng "nhìn thấy" trong quá trình huấn luyện.
 
@@ -326,6 +326,24 @@ Dựa trên kết quả thực nghiệm, rút ra được các nhận định qu
 Logistic Regression (Đường màu xanh dương), đường cong này vươn cao hơn rõ rệt và bao phủ diện tích lớn hơn với chỉ số AUC đạt 0.77. Điều này khẳng định mô hình tuyến tính này hoạt động hiệu quả hơn trong việc phân tách giữa hai lớp dữ liệu, đặc biệt là khả năng duy trì tỷ lệ phát hiện đúng (True Positive Rate) ở mức cao ngay cả khi chấp nhận một tỷ lệ báo động giả thấp.
 
 Random Forest (Đường màu xanh lá), đường cong nằm thấp hơn với chỉ số AUC chỉ đạt 0.71. Mặc dù là mô hình phức tạp hơn, nhưng trong trường hợp này Random Forest lại tỏ ra kém hiệu quả hơn trong việc xếp hạng xác suất rủi ro so với Logistic Regression. Đường cong của nó có xu hướng đi là là gần đường chéo ngẫu nhiên hơn, phản ánh sự khó khăn trong việc phân biệt rõ ràng các trường hợp nhân viên sắp nghỉ việc.
+
+## 3.3. Thảo luận và Lựa chọn Mô hình
+
+Từ kết quả thực nghiệm, nhóm nhận thấy sự đánh đổi rõ rệt (Trade-off) giữa hai mô hình, phản ánh đúng đặc thù kỹ thuật của từng thuật toán khi đối mặt với dữ liệu mất cân bằng:
+
+1.  **Góc độ "An toàn" (Random Forest):**
+    Mô hình Random Forest đạt độ chính xác tổng thể (Accuracy) cao vượt trội (~80%) nhờ vào cơ chế "bỏ phiếu số đông" (majority voting). Do dữ liệu nhóm "Không nghỉ việc" chiếm đa số, thuật toán có xu hướng tối ưu hóa hàm mất mát bằng cách dự đoán nghiêng về nhóm này.
+    *   *Hệ quả:* Mô hình rất "thận trọng", ít khi báo động sai, nhưng lại thất bại trong việc bắt các tín hiệu yếu của nhóm nhân sự nghỉ việc (Recall thấp - 47%).
+
+2.  **Góc độ "Phát hiện" (Logistic Regression):**
+    Ngược lại, Logistic Regression lại cho thấy khả năng phân tách ranh giới giữa hai lớp tốt hơn (thể hiện qua chỉ số AUC đạt 0.77 so với 0.71 của Random Forest). Dù là mô hình tuyến tính đơn giản, nó lại "nhạy cảm" hơn với các biến động của dữ liệu.
+    *   *Hệ quả:* Mô hình chấp nhận hy sinh độ chính xác tổng thể để "quét" được nhiều trường hợp rủi ro nhất có thể (Recall cao - 79%). Việc này dẫn đến tỷ lệ báo động giả (False Positive) tăng cao.
+
+**Kết luận cuối cùng:**
+
+Trong bài toán dự báo nhân sự (HR Analytics), chi phí cho một **False Negative** (bỏ sót nhân tài sắp nghỉ việc dẫn đến chảy máu chất xám) thường lớn hơn nhiều so với chi phí của một **False Positive** (nhầm lẫn nhân viên trung thành là có nguy cơ nghỉ). Mục tiêu cốt lõi của đề tài là xây dựng hệ thống cảnh báo sớm (Early Warning System).
+
+Do đó, nhóm quyết định lựa chọn **Logistic Regression** làm mô hình triển khai cuối cùng. Mặc dù độ chính xác tổng thể thấp hơn, nhưng khả năng bao phủ 79% rủi ro của nó mang lại giá trị thực tiễn cao hơn trong việc hỗ trợ bộ phận HR chủ động giữ chân nhân tài.
 
 # PHẦN 4. TRIỂN KHAI ỨNG DỤNG
 
