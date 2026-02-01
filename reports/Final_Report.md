@@ -31,7 +31,20 @@ Phát triển ứng dụng Web (Streamlit) tích hợp mô hình Machine Learnin
 
 -   Đọc dữ liệu bằng pandas, hàm pd.read_csv() được sử dụng để tải dữ liệu từ file nguồn vào bộ nhớ (DataFrame) để tiến hành phân tích.
 
-![Read Data](figures/read_data.jpg)
+```python
+# Đọc dữ liệu
+df = pd.read_csv(CSV_PATH)
+print(f"✅ Đọc thành công {len(df)} records từ CSV")
+print(f"\n📊 Shape: {df.shape}")
+print(f"📊 Columns: {df.shape[1]} columns")
+```
+
+```path
+✅ Đọc thành công 1470 records từ CSV
+
+📊 Shape: (1470, 35)
+📊 Columns: 35 columns
+```
 
 ## 2.2. Khám phá dữ liệu (EDA) và chọn lọc đặc trưng
 
@@ -365,7 +378,7 @@ Streamlit được lựa chọn do các ưu điểm sau:
 
 ## 4.3. Quy trình triển khai ứng dụng Streamlit
 
-### 4.3.1 Cài đặt các thư viện cần thiết
+### 4.3.1. Cài đặt các thư viện cần thiết
 
 ```python
 pip install streamlit
@@ -374,11 +387,16 @@ pip install pandas
 pip install joblib
 ```
 
-### 4.3.2 Xây dựng UI
+### 4.3.2. Xây dựng UI
 
 #### a. Phần Input của người dùng
 
 ![Input của user](figures/Picture4.jpg)
+
+<p align="center">
+  Hình 8: Giao diện nhập dữ liệu của người dùng.
+</p>
+
 
 Để xây dụng được UI như thế này, ta cần chia thành 2 cột:
 
@@ -422,6 +440,10 @@ marital_status = st.selectbox(
 #### b. UI hiển thị kết quả dự đoán
 
 ![UI kết quả 2 mô hình](figures/Output.jpg)
+
+<p align="center">
+  Hình 9: Giao diện hiển thị kết quả dự đoán.
+</p>
 
 Giao diện được chia thành hai cột song song bằng cách sử dụng st.columns(2):
 
@@ -472,7 +494,7 @@ with col2:
 
 ---
 
-## 4.4 Hạn chế và hướng phát triển
+## 4.4. Hạn chế và hướng phát triển
 
 ### Hạn chế
 
