@@ -378,6 +378,8 @@ Streamlit được lựa chọn do các ưu điểm sau:
 
 ## 4.3. Quy trình triển khai ứng dụng Streamlit
 
+Try me: https://project001aioconquer-l3qzooudjrfnsj7gcurcnm.streamlit.app/
+
 ### 4.3.1. Cài đặt các thư viện cần thiết
 
 ```python
