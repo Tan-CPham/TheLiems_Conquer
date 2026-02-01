@@ -71,7 +71,7 @@ Trước khi đưa vào mô hình, nhóm đã thực hiện phân tích khám ph
     ![Ma trận tương quan](figures/correlation_matrix.jpg)
 
 <p align="center">
-  Hình 3: Ma trận tương quan giữa các biến
+  Hình 3: Ma trận tương quan giữa các biến.
 </p>
 
 ## 2.3. Tiền xử lý dữ liệu
@@ -82,7 +82,7 @@ Dựa trên kết quả EDA, quy trình tiền xử lý được thực hiện q
 
 - Để tối ưu hóa hiệu suất mô hình và trải nghiệm người dùng trên ứng dụng, nhóm đã rút gọn từ 35 thuộc tính xuống còn 7 thuộc tính cốt lõi là `OverTime`, `MonthlyIncome`, `Age`, `TotalWorkingYears`, `YearsAtCompany`, `JobSatisfaction`, `MaritalStatus`.
 
-```
+```python
 selected_columns = [
         'Attrition',           # Target
         'OverTime',            # Feature 1
@@ -101,15 +101,14 @@ df = df[selected_columns]
 
 - Binary Encoding: Chuyển Attrition (Yes/No) $\rightarrow$ (1/0); OverTime (Yes/No) $\rightarrow$ (1/0).
 
-```
+```python
 df['Attrition'] = df['Attrition'].apply(lambda x: 1 if x == 'Yes' else 0)
-
 df['OverTime'] = df['OverTime'].apply(lambda x: 1 if x == 'Yes' else 0)
 ```
 
 - One-Hot Encoding: Áp dụng cho biến định danh MaritalStatus. Sử dụng tham số drop_first=True để tránh bẫy đa cộng tuyến (Dummy Variable Trap), chỉ giữ lại cột \_Married và \_Single (nếu cả 2 bằng 0 thì hiểu là Divorced).
 
-```
+```python
 df_reduce = pd.get_dummies(df_reduce, columns=['MaritalStatus'], drop_first=True)
 ```
 
@@ -119,35 +118,33 @@ df_reduce = pd.get_dummies(df_reduce, columns=['MaritalStatus'], drop_first=True
 
 - Sử dụng stratify=y để đảm bảo tỷ lệ nghỉ việc trong cả 2 tập là tương đương nhau.
 
-```
+```python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 ```
 
 4. **Chuẩn hóa dữ liệu (Feature Scaling):**
 
-- Sử dụng StandardScaler để đưa các biến số (`Age`, `MonthlyIncome`, `TotalWorkingYears`, `YearsAtCompany`, `JobSatisfaction`) về cùng phân phối chuẩn.
+Sử dụng StandardScaler để đưa các biến số (`Age`, `MonthlyIncome`, `TotalWorkingYears`, `YearsAtCompany`, `JobSatisfaction`) về cùng phân phối chuẩn.
 
-```
+```python
 numeric_cols = ['Age', 'MonthlyIncome', 'TotalWorkingYears', 'YearsAtCompany', 'JobSatisfaction']
 scaler = StandardScaler()
 
-
 X_train[numeric_cols] = scaler.fit_transform(X_train[numeric_cols])
-
 X_test[numeric_cols] = scaler.transform(X_test[numeric_cols])
 ```
 
 ![Chuẩn hóa dữ liệu](figures/scaling_data.jpg)
 
 <p align="center">
-  Hình 4: Trước và sau khi chuẩn hóa dữ liệu
+  Hình 4: Trước và sau khi chuẩn hóa dữ liệu.
 </p>
 
 5. **Xử lý mất cân bằng (Imbalance Handling):**
 
-- Tập dữ liệu huấn luyện (Train set) ban đầu bị lệch nghiêm trọng về phía lớp nhân viên "Ở lại" (Class 0), khiến mô hình dễ bỏ sót các trường hợp nhân viên "Nghỉ việc" (Class 1). Nhóm sử dụng thuật toán SMOTE để sinh thêm các dữ liệu giả lập (synthetic data) cho lớp thiểu số dựa trên nguyên lý láng giềng gần nhất (k-NN) trong không gian vector đã chuẩn hóa. Kết quả là số lượng mẫu của hai lớp trở nên cân bằng (50/50), giúp mô hình học được các đặc trưng của nhóm nghỉ việc tốt hơn và tránh hiện tượng thiên vị (bias) về nhóm đa số.
+Tập dữ liệu huấn luyện (Train set) ban đầu bị lệch nghiêm trọng về phía lớp nhân viên "Ở lại" (Class 0), khiến mô hình dễ bỏ sót các trường hợp nhân viên "Nghỉ việc" (Class 1). Nhóm sử dụng thuật toán SMOTE để sinh thêm các dữ liệu giả lập (synthetic data) cho lớp thiểu số dựa trên nguyên lý láng giềng gần nhất (k-NN) trong không gian vector đã chuẩn hóa. Kết quả là số lượng mẫu của hai lớp trở nên cân bằng (50/50), giúp mô hình học được các đặc trưng của nhóm nghỉ việc tốt hơn và tránh hiện tượng thiên vị (bias) về nhóm đa số.
 
-```
+```python
 smote = SMOTE(random_state=42)
 X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
 ```
@@ -155,7 +152,7 @@ X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
 ![Xử lý mất cân bằng](figures/smote_data_train.jpg)
 
 <p align="center">
-  Hình 5: Trước và sau khi xử lý thêm dữ liệu
+  Hình 5: Trước và sau khi xử lý thêm dữ liệu.
 </p>
 
 # 2. Mô tả dữ liệu
@@ -173,6 +170,148 @@ Sau quá trình chọn lọc, bộ dữ liệu cuối cùng đưa vào huấn lu
 | 7   | MaritalStatus     | Nominal         | Feature | Tình trạng hôn nhân (Single/Married/Divorced). Nhóm Single thường có khả năng nghỉ việc cao hơn. |
 
 # PHẦN 3. HUẤN LUYỆN VÀ ĐÁNH GIÁ MÔ HÌNH
+
+Sau khi hoàn tất tiền xử lý dữ liệu, nhóm tiến hành huấn luyện hai mô hình học máy phổ biến là Logistic Regression và Random Forest. Đây là hai thuật toán đại diện cho hai hướng tiếp cận khác nhau: tuyến tính (linear) và phi tuyến tính (non-linear/ensemble), giúp đưa ra cái nhìn đa chiều về khả năng dự báo.
+
+## 3.1. Lựa chọn và Cấu hình Mô hình
+
+### 3.1.1. Logistic Regression
+
+Lý do lựa chọn:
+
+- Là thuật toán cơ bản cho bài toán phân loại nhị phân (Binary Classification).
+
+- Dễ diễn giải (interpretable): Trọng số (weights) của mô hình cho biết mức độ ảnh hưởng tích cực hoặc tiêu cực của từng đặc trưng đến khả năng nghỉ việc.
+
+- Hoạt động tốt với dữ liệu đã được chuẩn hóa (StandardScaler) và có số lượng đặc trưng nhỏ (7 features).
+
+Cấu hình tham số:
+
+- max_iter=1000: Tăng số vòng lặp tối đa để đảm bảo thuật toán hội tụ (converge), do dữ liệu đã qua xử lý SMOTE có thể phức tạp hơn.
+
+- random_state=42: Đảm bảo kết quả có thể tái lập.
+
+```python
+from sklearn.linear_model import LogisticRegression
+
+def train_logistic_regression(X_train, y_train):
+    model = LogisticRegression(max_iter=1000, random_state=42)
+    model.fit(X_train, y_train)
+    return model
+```
+
+### 3.1.2. Random Forest Classifier
+
+Lý do lựa chọn:
+
+- Là phương pháp học kết hợp (Ensemble Learning), giúp giảm thiểu rủi ro quá khớp (Overfitting) thường gặp ở cây quyết định đơn lẻ.
+
+- Có khả năng xử lý tốt các mối quan hệ phi tuyến tính phức tạp giữa các đặc trưng nhân sự (ví dụ: sự tương tác giữa Tuổi tác và Mức lương tác động đến quyết định nghỉ việc).
+
+- Mạnh mẽ (Robust) trước nhiễu và không yêu cầu dữ liệu phải tuân theo phân phối chuẩn quá khắt khe.
+
+Cấu hình tham số:
+
+- n_estimators=100: Xây dựng tập hợp gồm 100 cây quyết định để đưa ra kết quả dự báo ổn định (thông qua cơ chế bỏ phiếu đa số).
+
+- max_depth=10: Giới hạn độ sâu tối đa của mỗi cây để kiểm soát độ phức tạp mô hình, tránh việc học quá chi tiết dữ liệu nhiễu.
+
+- n_jobs=-1: Tận dụng toàn bộ các lõi CPU có sẵn của hệ thống để tối ưu hóa tốc độ huấn luyện song song.
+
+- random_state=42: Đảm bảo tính nhất quán của kết quả huấn luyện trong mọi lần chạy.
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+def train_random_forest(X_train, y_train):
+    model = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42, n_jobs=-1)
+    model.fit(X_train, y_train)
+    return model
+```
+## 3.2 Đánh giá Hiệu suất (Model Evaluation)
+
+Việc đánh giá được thực hiện trên tập kiểm thử (X_test, y_test) - tập dữ liệu hoàn toàn mới mà mô hình chưa từng "nhìn thấy" trong quá trình huấn luyện.
+
+### 3.2.1. Các chỉ số đánh giá (Metrics)
+
+Accuracy (Độ chính xác tổng thể): Tỷ lệ dự đoán đúng trên tổng số mẫu.
+
+Precision (Độ chính xác của lớp dự đoán): Trong số các nhân viên được dự đoán sẽ nghỉ việc, bao nhiêu % thực sự nghỉ?
+
+Recall (Độ nhạy): Mô hình phát hiện được bao nhiêu % nhân viên nghỉ việc thực tế? (Đây là chỉ số quan trọng nhất trong bài toán giữ chân nhân tài).
+
+F1-Score: Trung bình điều hòa của Precision và Recall.
+
+```python
+from sklearn.metrics import accuracy_score, classification_report
+
+def evaluate_model(model, X_test, y_test, model_name="Model"):
+    y_pred = model.predict(X_test)
+    acc = accuracy_score(y_test, y_pred)
+    print(classification_report(y_test, y_pred))
+    return acc
+```
+
+### 3.2.2. Kết quả Đánh giá Thực nghiệm
+
+Để đánh giá hiệu quả thực tế, nhóm tiến hành kiểm thử trên tập dữ liệu Test (gồm 294 mẫu hoàn toàn mới). Kết quả được phân tích thông qua biểu đồ Ma trận nhầm lẫn (Confusion Matrix) và bảng chỉ số chi tiết.
+
+![So sánh Confusion Matrix trên tập kiểm thử](figures/model_comparison.jpg)
+
+<p align="center">
+  Hình 6: So sánh Confusion Matrix trên tập kiểm thử.
+</p>
+
+```path
+Logistic Regression Accuracy: 0.6803
+              precision    recall  f1-score   support
+
+           0       0.94      0.66      0.78       247
+           1       0.31      0.79      0.44        47
+
+    accuracy                           0.68       294
+   macro avg       0.62      0.72      0.61       294
+weighted avg       0.84      0.68      0.72       294
+
+
+Random Forest Accuracy: 0.7993
+              precision    recall  f1-score   support
+
+           0       0.89      0.86      0.88       247
+           1       0.39      0.47      0.43        47
+
+    accuracy                           0.80       294
+   macro avg       0.64      0.67      0.65       294
+weighted avg       0.81      0.80      0.81       294
+```
+
+Dựa trên kết quả thực nghiệm, rút ra được các nhận định quan trọng:
+
+1. Logistic Regression:
+
+- Điểm mạnh: Chỉ số Recall cho lớp Nghỉ việc đạt tới 79% (phát hiện đúng 37/47 trường hợp). Đây là ưu điểm lớn nhất, giúp doanh nghiệp không bỏ lọt các nhân sự đang có ý định rời đi.
+
+- Hạn chế: Độ chính xác tổng thể thấp (68%) do tỷ lệ báo động giả (False Positive) quá cao. Có tới 84 nhân viên trung thành bị dự đoán nhầm là sẽ nghỉ.
+
+2. Random Forest:
+
+- Điểm mạnh: Độ chính xác tổng thể (Accuracy) rất cao, đạt ~80%. Mô hình hoạt động ổn định, ít báo động sai (chỉ nhầm 34 trường hợp so với 84 của Logistic).
+
+- Hạn chế: Khả năng phát hiện rủi ro kém. Chỉ số Recall cho lớp Nghỉ việc chỉ đạt 47% (bỏ sót 25/47 trường hợp), đồng nghĩa với việc hơn một nửa số nhân viên có nguy cơ nghỉ việc sẽ không được hệ thống cảnh báo.
+
+### 3.2.3. Biểu đồ đường cong ROC
+
+Để có cái nhìn khách quan hơn về khả năng phân loại của hai mô hình ở các ngưỡng (threshold) khác nhau, nhóm sử dụng biểu đồ ROC và chỉ số diện tích dưới đường cong (AUC).
+
+![Biểu đồ đường cong ROC so sánh hai mô hình.](figures/roc_curve_comparison.jpg)
+
+<p align="center">
+  Hình 7: Biểu đồ đường cong ROC so sánh hai mô hình.
+</p>
+
+Logistic Regression (Đường màu xanh dương), đường cong này vươn cao hơn rõ rệt và bao phủ diện tích lớn hơn với chỉ số AUC đạt 0.77. Điều này khẳng định mô hình tuyến tính này hoạt động hiệu quả hơn trong việc phân tách giữa hai lớp dữ liệu, đặc biệt là khả năng duy trì tỷ lệ phát hiện đúng (True Positive Rate) ở mức cao ngay cả khi chấp nhận một tỷ lệ báo động giả thấp.
+
+Random Forest (Đường màu xanh lá), đường cong nằm thấp hơn với chỉ số AUC chỉ đạt 0.71. Mặc dù là mô hình phức tạp hơn, nhưng trong trường hợp này Random Forest lại tỏ ra kém hiệu quả hơn trong việc xếp hạng xác suất rủi ro so với Logistic Regression. Đường cong của nó có xu hướng đi là là gần đường chéo ngẫu nhiên hơn, phản ánh sự khó khăn trong việc phân biệt rõ ràng các trường hợp nhân viên sắp nghỉ việc.
 
 # PHẦN 4. TRIỂN KHAI ỨNG DỤNG
 
@@ -196,7 +335,7 @@ Streamlit được lựa chọn do các ưu điểm sau:
 
 ### 4.3.1 Cài đặt các thư viện cần thiết
 
-```bash
+```python
 pip install streamlit
 pip install scikit-learn
 pip install pandas
