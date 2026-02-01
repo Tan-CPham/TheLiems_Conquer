@@ -239,30 +239,22 @@ Việc đánh giá được thực hiện trên tập kiểm thử (X_test, y_te
 1.  **Accuracy (Độ chính xác tổng thể):**
     Tỷ lệ dự đoán đúng trên tổng số mẫu quan sát.
 
-    $
-    \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
-    $
+    $\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$
 
 2.  **Precision (Độ chính xác của lớp dự đoán):**
     Trong số các nhân viên được mô hình dự đoán là "Nghỉ việc", bao nhiêu phần trăm thực sự nghỉ?
 
-    $
-    \text{Precision} = \frac{TP}{TP + FP}
-    $
+    $\text{Precision} = \frac{TP}{TP + FP}$
 
 3.  **Recall (Độ nhạy - Sensitivity):**
     Mô hình phát hiện được bao nhiêu phần trăm nhân viên nghỉ việc thực tế?
 
-    $
-    \text{Recall} = \frac{TP}{TP + FN}
-    $
+    $\text{Recall} = \frac{TP}{TP + FN}$
 
 4.  **F1-Score:**
     Trung bình điều hòa của Precision và Recall, giúp đánh giá mô hình khi dữ liệu mất cân bằng.
-    
-    $
-    \text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
-    $
+
+    $\text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$
 
 ```python
 from sklearn.metrics import accuracy_score, classification_report
