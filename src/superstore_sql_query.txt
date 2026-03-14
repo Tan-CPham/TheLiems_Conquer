@@ -1,0 +1,70 @@
+-- Câu 1: Hiển thị 5 dòng dữ liệu đầu tiên để xem cấu trúc bảng.
+select * 
+from superstore 
+limit 5
+
+-- Câu 2: Hiển thị xem thử 5 đơn hàng ở khu vực miền Tây,
+-- và chỉ cần biết thông tin về Vùng, Tên sản phẩm và Doanh số của các đơn đó.
+select region, product_name, sales 
+from superstore
+where region = 'West'
+limit 5
+
+-- Câu 3: Tính Tổng doanh thu, Tổng số đơn hàng (mã `order_id` duy nhất) 
+-- và Tổng số lượng khách hàng duy nhất của toàn bộ cửa hàng.
+select sum(sales) as revenue,
+       count(distinct order_id) as revenue,
+       count(distinct customer_id) as unique_customers
+from superstore
+
+-- Câu 4: Phân tích Vùng (`region`) nào mang lại doanh số lớn nhất, sắp xếp từ cao xuống thấp.
+select region, sum(sales) as revenue
+from superstore
+group by region
+order by revenue desc
+
+-- Câu 5: Xác định Danh mục (`category`) nào tạo ra nhiều lợi nhuận nhất.
+select category, SUM(profit) as total_profit
+from superstore
+group by category
+order by total_profit DESC
+
+-- Câu 6: Tìm 5 sản phẩm (`product_name`) có tổng doanh số cao nhất.
+select product_name, sum(sales) as revenue
+from superstore
+group by product_name
+order by revenue desc
+limit 5
+
+-- Câu 7: Gom nhóm kết hợp theo category và sub_category 
+-- để xem chi tiết mảng nào mang lại doanh thu cao nhất.
+select category, sub_category, sum(sales) as revenue
+from superstore
+group by category, sub_category
+order by revenue desc
+
+-- Câu 8: Trích xuất năm từ cột ngày đặt hàng (order_date) 
+-- và tính tổng doanh thu theo từng năm để xem đà tăng trưởng.
+select YEAR(order_date) as order_year, sum(sales) as revenue
+from superstore
+group by order_year
+order by order_year
+
+-- Câu 9: ính tổng doanh thu chi tiết theo từng tháng, 
+-- nhưng chỉ giới hạn dữ liệu trong năm 2018.
+select date_format(order_date, '%Y-%m') as order_month, sum(sales) as revenue
+from superstore
+where year(order_date) = 2018
+group by order_month
+order by order_month
+
+-- Câu 10: Phòng Marketing muốn gửi quà tri ân cho các khách hàng VIP. 
+-- Bạn hãy tìm danh sách các khách hàng (`customer_name`) có tổng doanh số (`sales`) 
+-- mua hàng từ trước đến nay lớn hơn 14400, 
+-- và sắp xếp danh sách này từ cao xuống thấp.
+
+select customer_name, sum(sales) as revenue
+from superstore
+group by customer_name
+having revenue > 14400
+order by revenue desc
