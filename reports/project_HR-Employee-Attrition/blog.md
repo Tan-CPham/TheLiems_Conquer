@@ -259,7 +259,7 @@ Vẫn dùng công thức nội suy như SMOTE gốc:
 
 | Công thức                                           | Ý nghĩa                       |
 | --------------------------------------------------- | ----------------------------- |
-| $$ x_{\text{new continuous}} = x_i + \lambda \times (x_{zi} - x_i) $$ | Nội suy tuyến tính giữa 2 mẫu |
+| $$ x_{new_continuous} = x_i + λ × (x_{zi} - x_i) $$ | Nội suy tuyến tính giữa 2 mẫu |
 
 **3. Tạo mẫu mới cho biến phân loại:**
 Thay vì nội suy, SMOTE-NC dùng nguyên tắc **Majority Vote** — giá trị của biến phân loại cho mẫu mới sẽ là giá trị xuất hiện **nhiều nhất (mode)** trong số k láng giềng gần nhất.
