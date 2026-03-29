@@ -74,10 +74,14 @@ else:
 
 Để phát hiện các giá trị ngoại lệ, nhóm sử dụng phương pháp **IQR (Interquartile Range)** — một kỹ thuật thống kê phổ biến xác định outlier dựa trên khoảng tứ phân vị:
 
+<div align="center">
+
 | Ngưỡng      | Công thức      |
 | ----------- | -------------- |
 | Lower Fence | Q1 - 1.5 × IQR |
 | Upper Fence | Q3 + 1.5 × IQR |
+
+</div>
 
 Bất kỳ giá trị nào nằm ngoài hai ngưỡng trên đều được xem là **outlier**.
 
