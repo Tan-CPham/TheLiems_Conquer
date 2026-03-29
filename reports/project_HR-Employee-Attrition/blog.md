@@ -45,29 +45,30 @@ else:
 
 **Kết quả:**
 
-| Hạng mục | Kết quả |
-|---|---|
-| Số hàng | 1,470 |
-| Số cột | 35 |
+| Hạng mục     | Kết quả  |
+| ------------ | -------- |
+| Số hàng      | 1,470    |
+| Số cột       | 35       |
 | Missing data | Không có |
-| Duplicate | Không có |
+| Duplicate    | Không có |
 
-| Logic Check | Số vi phạm |
-|---|---|
-| TotalWorkingYears < YearsAtCompany | 0 row(s) |
-| YearsAtCompany < YearsInCurrentRole | 0 row(s) |
-| YearsAtCompany < YearsWithCurrManager | 0 row(s) |
-| YearsAtCompany < YearsSinceLastPromotion | 0 row(s) |
-| Age < 18 | 0 row(s) |
-| MonthlyIncome ≤ 0 | 0 row(s) |
+| Logic Check                              | Số vi phạm |
+| ---------------------------------------- | ---------- |
+| TotalWorkingYears < YearsAtCompany       | 0 row(s)   |
+| YearsAtCompany < YearsInCurrentRole      | 0 row(s)   |
+| YearsAtCompany < YearsWithCurrManager    | 0 row(s)   |
+| YearsAtCompany < YearsSinceLastPromotion | 0 row(s)   |
+| Age < 18                                 | 0 row(s)   |
+| MonthlyIncome ≤ 0                        | 0 row(s)   |
+
 #### **1.2. Kiểm tra Outliers**
 
 Để phát hiện các giá trị ngoại lệ, nhóm sử dụng phương pháp **IQR (Interquartile Range)** — một kỹ thuật thống kê phổ biến xác định outlier dựa trên khoảng tứ phân vị:
 
-| Ngưỡng | Công thức |
-|---|---|
+| Ngưỡng      | Công thức      |
+| ----------- | -------------- |
 | Lower Fence | Q1 - 1.5 × IQR |
-| Upper Fence | Q3 + 1.5 × IQR |  
+| Upper Fence | Q3 + 1.5 × IQR |
 
 Bất kỳ giá trị nào nằm ngoài hai ngưỡng trên đều được xem là **outlier**.
 
@@ -185,10 +186,10 @@ Ngoài ra, cột `PerformanceRating` có **variance gần như bằng 0** nên c
 
 Để bổ sung thêm thông tin cho mô hình, nhóm tạo thêm 3 đặc trưng mới:
 
-| Đặc trưng mới | Công thức | Ý nghĩa |
-|---|---|---|
-| `TenureRatio` | YearsAtCompany / (TotalWorkingYears + 1) | Mức độ trung thành với công ty hiện tại |
-| `IncomePerAge` | MonthlyIncome / Age | Mức lương tương đối so với độ tuổi |
+| Đặc trưng mới  | Công thức                                    | Ý nghĩa                                                   |
+| -------------- | -------------------------------------------- | --------------------------------------------------------- |
+| `TenureRatio`  | YearsAtCompany / (TotalWorkingYears + 1)     | Mức độ trung thành với công ty hiện tại                   |
+| `IncomePerAge` | MonthlyIncome / Age                          | Mức lương tương đối so với độ tuổi                        |
 | `PromotionLag` | YearsSinceLastPromotion - YearsInCurrentRole | Mức độ chậm thăng tiến so với thời gian ở vị trí hiện tại |
 
 ```python
@@ -211,6 +212,7 @@ df_fe["PromotionLag"] = (
 ### **3. Xử lý Imbalanced Data**
 
 Sau quá trình phân tích, cột `Attrition` bị lệch rất rõ — lớp `Yes` (nghỉ việc) chiếm tỷ lệ thiểu số so với lớp `No` (ở lại). Để giải quyết vấn đề này, nhóm thử nghiệm và so sánh hai kỹ thuật: **SMOTE-NC** và **CTGAN**.
+
 #### **3.1. SMOTE-NC (Synthetic Minority Oversampling Technique for Nominal and Continuous)**
 
 **Nguyên lý cơ bản**
@@ -219,11 +221,11 @@ Thuật toán SMOTE thực hiện phương pháp tăng cường mẫu **(oversam
 
 **SMOTE hoạt động như thế nào?**
 
-**Bước 1 — Xác định lớp thiểu số:** Chọn một mẫu dữ liệu $x_i$ từ tập hợp các mẫu thuộc lớp thiểu số.  
+**Bước 1 — Xác định lớp thiểu số:** Chọn một mẫu dữ liệu $x_i$ từ tập hợp các mẫu thuộc lớp thiểu số.
 
 **Bước 2 — Tìm láng giềng:** Tìm **k láng giềng gần nhất** (thường dùng k = 5) của **x_i** trong lớp thiểu số, dựa trên khoảng cách Euclidean.
 
-**Bước 3 — Ma trận tương quan (Correlation Matrix) của các biến số* Chọn một láng giềng:** Chọn ngẫu nhiên một trong k láng giềng đó, gọi là **x_zi**.
+**Bước 3 — Ma trận tương quan (Correlation Matrix) của các biến số\* Chọn một láng giềng:** Chọn ngẫu nhiên một trong k láng giềng đó, gọi là **x_zi**.
 
 **Bước 4 — Tạo mẫu tổng hợp:** Mẫu mới **x_new** được tạo ra theo công thức:
 
@@ -241,7 +243,7 @@ Thuật toán SMOTE thực hiện phương pháp tăng cường mẫu **(oversam
   <p><i>Hình 7: Minh họa thuật toán SMOTE (Nguồn: AI Generated)</i></p>
 </div>
 
- Tuy theo gian, kỹ thuật SMOTE đã phát triển để có thể phù hợp cho nhiều bài toán khác nhau. Đối với bài toàn của chúng em có dữ liệu loại Categoric và dữ liệu Numberic. Thì thuật toán SMOTE-NC được cho là tối ưu nhất đối với dataset có hai loại trên 
+Tuy theo gian, kỹ thuật SMOTE đã phát triển để có thể phù hợp cho nhiều bài toán khác nhau. Đối với bài toàn của chúng em có dữ liệu loại Categoric và dữ liệu Numberic. Thì thuật toán SMOTE-NC được cho là tối ưu nhất đối với dataset có hai loại trên
 
 **Tại sao dùng SMOTE-NC?**
 
@@ -255,9 +257,9 @@ Vì không thể dùng khoảng cách Euclidean thuần túy cho biến phân lo
 **2. Tạo mẫu mới cho biến số:**
 Vẫn dùng công thức nội suy như SMOTE gốc:
 
-| Công thức                                            | Ý nghĩa                       |
-| ---------------------------------------------------- | ----------------------------- |
-| $$ x_{new\_continuous} = x_i + λ × (x_{zi} - x_i) $$ | Nội suy tuyến tính giữa 2 mẫu |
+| Công thức                                           | Ý nghĩa                       |
+| --------------------------------------------------- | ----------------------------- |
+| $$ x*{new_continuous} = x_i + λ × (x*{zi} - x_i) $$ | Nội suy tuyến tính giữa 2 mẫu |
 
 **3. Tạo mẫu mới cho biến phân loại:**
 Thay vì nội suy, SMOTE-NC dùng nguyên tắc **Majority Vote** — giá trị của biến phân loại cho mẫu mới sẽ là giá trị xuất hiện **nhiều nhất (mode)** trong số k láng giềng gần nhất.
@@ -299,6 +301,7 @@ synthetic_minority = synth_data[synth_data['Attrition'] == 'Yes'].head(samples_t
 # Ghép với tập train ban đầu
 train_ctgan_df = pd.concat([train_df, synthetic_minority])
 ```
+
 #### **3.3. So sánh kết quả**
 
 <div align="center">
@@ -324,9 +327,9 @@ Vậy nếu một thuộc tính không quan trọng, không có ảnh hưởng g
 
 > **Feature Importance** có thể hiểu là mức độ đóng góp của một thuộc tính (biến đầu vào) vào khả năng dự đoán của mô hình.
 
-Theo **Chip Huyen** trong *Designing Machine Learning Systems* (trang 142):
+Theo **Chip Huyen** trong _Designing Machine Learning Systems_ (trang 142):
 
-> *"A feature's importance to a model is measured by how much that model's performance deteriorates if that feature or a set of features containing that feature is removed from the model."*
+> _"A feature's importance to a model is measured by how much that model's performance deteriorates if that feature or a set of features containing that feature is removed from the model."_
 >
 > 🇻🇳 "Tầm quan trọng của một đặc trưng được đo bằng mức độ mà hiệu suất của mô hình giảm đi khi ta loại bỏ đặc trưng đó (hoặc loại bỏ một nhóm đặc trưng có chứa nó)."
 
@@ -334,11 +337,11 @@ Nói cách khác, nếu bỏ một đặc trưng mà mô hình vẫn hoạt đ�
 
 Có nhiều phương pháp để xác định mức độ quan trọng của đặc trưng, phân thành các nhóm chính:
 
-| Phương pháp | Câu hỏi trả lời | Ứng dụng |
-|---|---|---|
-| **Global Importance** | "Những đặc trưng nào quan trọng nhất đối với mô hình nói chung?" | Hiểu hành vi tổng thể, hỗ trợ chọn lọc đặc trưng |
-| **Local Importance** | "Tại sao mô hình đưa ra dự đoán cụ thể này?" | Giải thích từng dự đoán, gỡ lỗi quyết định riêng lẻ |
-| **Both (Global & Local)** | Cả hai | Hoạt động ở cả hai phạm vi — tiêu biểu là **SHAP** |
+| Phương pháp               | Câu hỏi trả lời                                                  | Ứng dụng                                            |
+| ------------------------- | ---------------------------------------------------------------- | --------------------------------------------------- |
+| **Global Importance**     | "Những đặc trưng nào quan trọng nhất đối với mô hình nói chung?" | Hiểu hành vi tổng thể, hỗ trợ chọn lọc đặc trưng    |
+| **Local Importance**      | "Tại sao mô hình đưa ra dự đoán cụ thể này?"                     | Giải thích từng dự đoán, gỡ lỗi quyết định riêng lẻ |
+| **Both (Global & Local)** | Cả hai                                                           | Hoạt động ở cả hai phạm vi — tiêu biểu là **SHAP**  |
 
 ## III. XAI (Explainable AI)
 
@@ -355,7 +358,7 @@ Có nhiều phương pháp để xác định mức độ quan trọng của đ�
 
 Hãy tưởng tượng chúng ta có một người yêu rất thông minh, tên là AI. AI có thể luôn đúng (nếu người yêu không đúng thì có thể là mình sai) và đoán được mọi thứ (thậm chí đoán được cả việc mình đang giấu quỹ đen ở đâu), nhưng lại mắc tính 'lầm lì'.
 
-Chúng ta đưa cho AI thông tin về tiền lương tháng này (giả dụ khoảng một con bò 🐄), AI phán một câu xanh rờn: "còn thiếu". Khi hỏi lại *"Hay là em tính nhầm?"*, AI chỉ im lặng, mặt không cảm xúc, và liếc nhìn. Đây chính là **"Chiếc hộp đen (Black box)"** — chúng ta biết kết quả nhưng không hiểu lý do.
+Chúng ta đưa cho AI thông tin về tiền lương tháng này (giả dụ khoảng một con bò 🐄), AI phán một câu xanh rờn: "còn thiếu". Khi hỏi lại _"Hay là em tính nhầm?"_, AI chỉ im lặng, mặt không cảm xúc, và liếc nhìn. Đây chính là **"Chiếc hộp đen (Black box)"** — chúng ta biết kết quả nhưng không hiểu lý do.
 
 Chính lúc này, chúng ta cần **XAI** để yêu cầu AI giải thích lý do — đóng vai trò như một "liều thuốc tự sự", bắt người yêu AI phải mở lời.
 
@@ -396,9 +399,9 @@ Quy trình hoạt động của SHAP gồm 4 bước:
 - **Dữ liệu và Dự đoán:** Cung cấp dữ liệu của một đối tượng (Age, OverTime, YearsAtCompany, JobRole...), mô hình đưa ra kết quả dự đoán (ví dụ: nhân viên này sẽ "Stay").
 - **Bộ giải thích SHAP:** Dùng nền tảng từ **Game Theory** để phân bổ "phần thưởng" (kết quả dự đoán) cho từng "người chơi" (đặc trưng). Tổng đóng góp của các đặc trưng bằng chính xác mức chênh lệch giữa dự đoán hiện tại và dự đoán trung bình.
 - **Kết quả giải thích:** Kết quả được trình bày dưới dạng trực quan hóa mức độ ảnh hưởng:
-	- **Màu xanh:** JobRole  thể hiện yếu tố đang đẩy dự đoán về hướng "Stay". 
-	- **Màu đỏ:** Age, OverTime thể hiện yếu tố kéo về hướng ngược lại. 
-	- Độ dài thanh thể hiện cường độ tác động của tính năng đó mạnh hay yếu.
+  - **Màu xanh:** JobRole thể hiện yếu tố đang đẩy dự đoán về hướng "Stay".
+  - **Màu đỏ:** Age, OverTime thể hiện yếu tố kéo về hướng ngược lại.
+  - Độ dài thanh thể hiện cường độ tác động của tính năng đó mạnh hay yếu.
 - Con người đưa ra quyết định: Mục tiêu cuối cùng của XAI không phải là thay thế con người, mà là cung cấp bằng chứng xác thực. Khi nhìn vào biểu đồ SHAP, nhà quản lý không chỉ biết AI dự đoán nhân viên sẽ ở lại, mà còn hiểu rằng "Anh ấy ở lại vì vai trò công việc phù hợp, dù yếu tố tuổi tác và làm thêm giờ đang gây áp lực tiêu cực". Từ đó, con người có thể đưa ra quyết định hoặc điều chỉnh chính sách dựa trên sự hiểu biết thấu đáo.
 
 #### **4.2. Kernel SHAP**
@@ -538,32 +541,32 @@ else:
   <img src="figures/15.png" width="70%">
   <p><i>Hình 15: SHAP Summary Plot cho mô hình Random Forest</i></p>
 </div>
+
 ## Tổng kết
 
 Dự án đã chuyển đổi mô hình dự báo rủi ro nghỉ việc từ phương pháp truyền thống sang quy trình **Data-Centric AI** kết hợp **XAI (Explainable AI)**, giúp giải quyết bài toán "dữ liệu rác" từ các giai đoạn trước. Thông qua việc làm sạch, kỹ thuật đặc trưng và áp dụng thuật toán **SMOTE-NC** để cân bằng dữ liệu, nhóm đã cải thiện đáng kể hiệu suất mô hình, đặc biệt là tăng khả năng nhận diện nhóm nhân sự có nguy cơ nghỉ việc lên gấp đôi. Kết quả này chuyển hóa những con số khô khan thành các chiến lược quản trị nhân sự thực tiễn, giúp doanh nghiệp chủ động đưa ra các giải pháp giữ chân nhân tài một cách khoa học và hiệu quả.
 
-
 ## Tài liệu tham khảo
 
-[1]  N. V. Chawla, K. W. Bowyer, L. O. Hall, and W. P. Kegelmeyer, "SMOTE: synthetic minority over-sampling technique," _J. Artif. Intell. Res._, Jun. 2002. 
+[1] N. V. Chawla, K. W. Bowyer, L. O. Hall, and W. P. Kegelmeyer, "SMOTE: synthetic minority over-sampling technique," _J. Artif. Intell. Res._, Jun. 2002.
 Xem tại: https://doi.org/10.1613/jair.953
 
-[2]  L. Xu, M. Skoularidou, A. Cuesta-Infante, and K. Veeramachaneni, "Modeling tabular data using conditional GAN," in _Advances in Neural Information Processing Systems_, 2019, vol. 32.
+[2] L. Xu, M. Skoularidou, A. Cuesta-Infante, and K. Veeramachaneni, "Modeling tabular data using conditional GAN," in _Advances in Neural Information Processing Systems_, 2019, vol. 32.
 Xem tại: https://arxiv.org/abs/1907.00503
 
-[3]  V. Kovanović, S. Joksimović, and G. Siemens, "Explaining a probabilistic prediction on the simplex with Shapley compositions," _Nature Machine Intelligence_ Jan. 2024.
+[3] V. Kovanović, S. Joksimović, and G. Siemens, "Explaining a probabilistic prediction on the simplex with Shapley compositions," _Nature Machine Intelligence_ Jan. 2024.
 Xem tại: https://arxiv.org/abs/2408.01382
 
-[4]  A. J. Barda, J. W. Gichoya, and S. Purkayastha, "Mind the XAI Gap: A Human-Centered LLM Framework for Democratizing Explainable AI," _arXiv preprint arXiv:2404.14535_, 2024. 
+[4] A. J. Barda, J. W. Gichoya, and S. Purkayastha, "Mind the XAI Gap: A Human-Centered LLM Framework for Democratizing Explainable AI," _arXiv preprint arXiv:2404.14535_, 2024.
 Xem tại: [https://arxiv.org/abs/2404.14535](https://arxiv.org/abs/2404.14535)
 
-[5]  V. Kovanović, S. Joksimović, and G. Siemens, "Explaining a probabilistic prediction on the simplex with Shapley compositions," _Nature Machine Intelligence_, Jan. 2024. 
+[5] V. Kovanović, S. Joksimović, and G. Siemens, "Explaining a probabilistic prediction on the simplex with Shapley compositions," _Nature Machine Intelligence_, Jan. 2024.
 Xem tại: [https://arxiv.org/html/2408.01382v1#S1](https://arxiv.org/html/2408.01382v1#S1)
 
-[6]  Truong-Binh Duong, Nguyen-Phuc Thinh. , và Dinh-Quang Vinh (2025), "XAI Introduction: LIME and ANCHOR,". 
+[6] Truong-Binh Duong, Nguyen-Phuc Thinh. , và Dinh-Quang Vinh (2025), "XAI Introduction: LIME and ANCHOR,".
 AIO Tutorial: https://tutorial.aivietnam.edu.vn/pdf/39/info
 
-[7]  L.H.Anh Duy (2025) "Explainable AI với SHAP: Từ lý thuyết đến ứng dụng".
+[7] L.H.Anh Duy (2025) "Explainable AI với SHAP: Từ lý thuyết đến ứng dụng".
 AIO Conquer: https://aioconquer.aivietnam.edu.vn/posts/report-giai-thuat-shap-trong-explainable-ai
 
 [8] L.D.Hoang, N.X.Tien, T.T.Tai, P.C.Tan (2026) "Dự báo rủi ro nghỉ việc của nhân sự".
