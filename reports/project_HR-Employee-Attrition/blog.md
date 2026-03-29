@@ -45,12 +45,19 @@ else:
 
 **Kết quả:**
 
+<center>
+
 | Hạng mục     | Kết quả  |
 | ------------ | -------- |
 | Số hàng      | 1,470    |
 | Số cột       | 35       |
 | Missing data | Không có |
 | Duplicate    | Không có |
+
+
+</center>
+
+<center>
 
 | Logic Check                              | Số vi phạm |
 | ---------------------------------------- | ---------- |
@@ -60,6 +67,8 @@ else:
 | YearsAtCompany < YearsSinceLastPromotion | 0 row(s)   |
 | Age < 18                                 | 0 row(s)   |
 | MonthlyIncome ≤ 0                        | 0 row(s)   |
+
+</center>
 
 #### **1.2. Kiểm tra Outliers**
 
