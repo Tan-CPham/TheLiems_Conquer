@@ -590,36 +590,21 @@ Dự án đã chuyển đổi mô hình dự báo rủi ro nghỉ việc từ ph
 ## Tài liệu tham khảo
 
 [1] N. V. Chawla, K. W. Bowyer, L. O. Hall, and W. P. Kegelmeyer, "SMOTE: synthetic minority over-sampling technique," _J. Artif. Intell. Res._, Jun. 2002.
-
 Xem tại: https://doi.org/10.1613/jair.953
 
-[2] L. Xu, M. Skoularidou, A. Cuesta-Infante, and K. Veeramachaneni, "Modeling tabular data using conditional GAN," in _Advances in Neural Information Processing Systems_, 2019, vol. 32.
+[2] L. Xu, M. Skoularidou, A. Cuesta-Infante, and K. Veeramachaneni, "Modeling tabular data using conditional GAN," in _Advances in Neural Information Processing Systems_, 2019, vol. 32. Xem tại: https://arxiv.org/abs/1907.00503
 
-Xem tại: https://arxiv.org/abs/1907.00503
+[3] V. Kovanović, S. Joksimović, and G. Siemens, "Explaining a probabilistic prediction on the simplex with Shapley compositions," _Nature Machine Intelligence_ Jan. 2024. Xem tại: https://arxiv.org/abs/2408.01382
 
-[3] V. Kovanović, S. Joksimović, and G. Siemens, "Explaining a probabilistic prediction on the simplex with Shapley compositions," _Nature Machine Intelligence_ Jan. 2024.
+[4] A. J. Barda, J. W. Gichoya, and S. Purkayastha, "Mind the XAI Gap: A Human-Centered LLM Framework for Democratizing Explainable AI," _arXiv preprint arXiv:2404.14535_, 2024. Xem tại: [https://arxiv.org/abs/2404.14535](https://arxiv.org/abs/2404.14535)
 
-Xem tại: https://arxiv.org/abs/2408.01382
+[5] V. Kovanović, S. Joksimović, and G. Siemens, "Explaining a probabilistic prediction on the simplex with Shapley compositions," _Nature Machine Intelligence_, Jan. 2024. Xem tại: [https://arxiv.org/html/2408.01382v1#S1](https://arxiv.org/html/2408.01382v1#S1)
 
-[4] A. J. Barda, J. W. Gichoya, and S. Purkayastha, "Mind the XAI Gap: A Human-Centered LLM Framework for Democratizing Explainable AI," _arXiv preprint arXiv:2404.14535_, 2024.
+[6] Truong-Binh Duong, Nguyen-Phuc Thinh. , và Dinh-Quang Vinh (2025), "XAI Introduction: LIME and ANCHOR,". AIO Tutorial: https://tutorial.aivietnam.edu.vn/pdf/39/info
 
-Xem tại: [https://arxiv.org/abs/2404.14535](https://arxiv.org/abs/2404.14535)
+[7] L.H.Anh Duy (2025) "Explainable AI với SHAP: Từ lý thuyết đến ứng dụng". AIO Conquer: https://aioconquer.aivietnam.edu.vn/posts/report-giai-thuat-shap-trong-explainable-ai
 
-[5] V. Kovanović, S. Joksimović, and G. Siemens, "Explaining a probabilistic prediction on the simplex with Shapley compositions," _Nature Machine Intelligence_, Jan. 2024.
-
-Xem tại: [https://arxiv.org/html/2408.01382v1#S1](https://arxiv.org/html/2408.01382v1#S1)
-
-[6] Truong-Binh Duong, Nguyen-Phuc Thinh. , và Dinh-Quang Vinh (2025), "XAI Introduction: LIME and ANCHOR,".
-
-AIO Tutorial: https://tutorial.aivietnam.edu.vn/pdf/39/info
-
-[7] L.H.Anh Duy (2025) "Explainable AI với SHAP: Từ lý thuyết đến ứng dụng".
-
-AIO Conquer: https://aioconquer.aivietnam.edu.vn/posts/report-giai-thuat-shap-trong-explainable-ai
-
-[8] L.D.Hoang, N.X.Tien, T.T.Tai, P.C.Tan (2026) "Dự báo rủi ro nghỉ việc của nhân sự".
-
-AIO Conquer: https://aioconquer.aivietnam.edu.vn/posts/project-warmup-dot-1-du-bao-rui-ro-nghi-viec-cua-nhan-su
+[8] L.D.Hoang, N.X.Tien, T.T.Tai, P.C.Tan (2026) "Dự báo rủi ro nghỉ việc của nhân sự". AIO Conquer: https://aioconquer.aivietnam.edu.vn/posts/project-warmup-dot-1-du-bao-rui-ro-nghi-viec-cua-nhan-su
 
 ## Mã nguồn tham khảo
 
