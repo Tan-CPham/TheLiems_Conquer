@@ -156,6 +156,8 @@ Một số quan sát nổi bật:
 
 Dựa trên biểu đồ so sánh, có thể nhận diện rõ các yếu tố rủi ro cao:
 
+<div align="center">
+
 | Đặc trưng           | Nhóm rủi ro cao      | Tỷ lệ nghỉ việc                                   |
 | ------------------- | -------------------- | ------------------------------------------------- |
 | **OverTime**        | Làm thêm giờ (`Yes`) | Hơn 30% — gấp 3 lần nhóm không OT (~10%)          |
@@ -163,6 +165,8 @@ Dựa trên biểu đồ so sánh, có thể nhận diện rõ các yếu tố r
 | **Marital Status**  | Single (Độc thân)    | ~**25%** — cao hơn nhóm đã kết hôn/ly hôn         |
 | **Business Travel** | Travel_Frequently    | Gần **25%** — áp lực cân bằng công việc–cuộc sống |
 | **Department**      | Sales                | Cao hơn rõ rệt so với R&D và HR                   |
+
+</div>
 
 > **Nhận xét chung:** Các yếu tố gây nghỉ việc chủ yếu liên quan đến **áp lực công việc** (OT, công tác thường xuyên) và **giai đoạn sự nghiệp** (độc thân, vị trí Sales entry-level). Đây sẽ là những feature quan trọng mà mô hình cần học được — và XAI sẽ giúp kiểm chứng điều này ở phần sau.
 
@@ -199,11 +203,15 @@ Ngoài ra, cột `PerformanceRating` có **variance gần như bằng 0** nên c
 
 Để bổ sung thêm thông tin cho mô hình, nhóm tạo thêm 3 đặc trưng mới:
 
+<div align="center">
+
 | Đặc trưng mới  | Công thức                                    | Ý nghĩa                                                   |
 | -------------- | -------------------------------------------- | --------------------------------------------------------- |
 | `TenureRatio`  | YearsAtCompany / (TotalWorkingYears + 1)     | Mức độ trung thành với công ty hiện tại                   |
 | `IncomePerAge` | MonthlyIncome / Age                          | Mức lương tương đối so với độ tuổi                        |
 | `PromotionLag` | YearsSinceLastPromotion - YearsInCurrentRole | Mức độ chậm thăng tiến so với thời gian ở vị trí hiện tại |
+
+</div>
 
 ```python
 # Fraction of career spent at current company (loyalty proxy)
@@ -242,12 +250,16 @@ Thuật toán SMOTE thực hiện phương pháp tăng cường mẫu **(oversam
 
 **Bước 4 — Tạo mẫu tổng hợp:** Mẫu mới **x_new** được tạo ra theo công thức:
 
+<div align="center">
+
 | Thành phần                                        | Ý nghĩa                                   |
 | ------------------------------------------------- | ----------------------------------------- |
 | $$x_{new} = x_i + \lambda \times (x_{zi} - x_i)$$ | Công thức nội suy                         |
 | $x_i$                                             | Vector đặc trưng của mẫu hiện tại         |
 | $x_{zi}$                                          | Vector đặc trưng của láng giềng được chọn |
 | $λ$                                               | Số thực ngẫu nhiên trong khoảng [0, 1]    |
+
+</div>
 
 > **Lưu ý:** Vì SMOTE dựa trên khoảng cách Euclidean và phép trừ vector, nó mặc định tất cả các đặc trưng đều là **số liên tục (continuous)**. Điều này đặt ra vấn đề khi dataset có cả biến phân loại.
 
@@ -270,9 +282,13 @@ Vì không thể dùng khoảng cách Euclidean thuần túy cho biến phân lo
 **2. Tạo mẫu mới cho biến số:**
 Vẫn dùng công thức nội suy như SMOTE gốc:
 
+<div align="center">
+
 | Công thức                                                             | Ý nghĩa                       |
 | --------------------------------------------------------------------- | ----------------------------- |
 | $$x_{\mathrm{new_continuous}} = x_i + \lambda \times (x_{zi} - x_i)$$ | Nội suy tuyến tính giữa 2 mẫu |
+
+</div>
 
 **3. Tạo mẫu mới cho biến phân loại:**
 Thay vì nội suy, SMOTE-NC dùng nguyên tắc **Majority Vote** — giá trị của biến phân loại cho mẫu mới sẽ là giá trị xuất hiện **nhiều nhất (mode)** trong số k láng giềng gần nhất.
@@ -350,11 +366,15 @@ Nói cách khác, nếu bỏ một đặc trưng mà mô hình vẫn hoạt đ�
 
 Có nhiều phương pháp để xác định mức độ quan trọng của đặc trưng, phân thành các nhóm chính:
 
+<div align="center">
+
 | Phương pháp               | Câu hỏi trả lời                                                  | Ứng dụng                                            |
 | ------------------------- | ---------------------------------------------------------------- | --------------------------------------------------- |
 | **Global Importance**     | "Những đặc trưng nào quan trọng nhất đối với mô hình nói chung?" | Hiểu hành vi tổng thể, hỗ trợ chọn lọc đặc trưng    |
 | **Local Importance**      | "Tại sao mô hình đưa ra dự đoán cụ thể này?"                     | Giải thích từng dự đoán, gỡ lỗi quyết định riêng lẻ |
 | **Both (Global & Local)** | Cả hai                                                           | Hoạt động ở cả hai phạm vi — tiêu biểu là **SHAP**  |
+
+</div>
 
 ## III. XAI (Explainable AI)
 
@@ -381,17 +401,25 @@ Các thuật toán trong XAI được phân loại dựa trên hai tiêu chí ch
 
 **Thời điểm giải thích:**
 
+<div align="center">
+
 | Loại          | Biệt danh              | Mô tả                                                                                                                                                                                                             |
 | ------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Intrinsic** | "Người yêu thẳng thắn" | Mô hình có cấu trúc đơn giản đến mức bản thân chúng đã là một lời giải thích (Ví dụ như: Decision Tree, Linear Regression,...)                                                                                    |
 | **Post-hoc**  | "Người yêu bí ẩn"      | Đây là cách chúng ta xử lý các mô hình "Hộp đen" (như Random Forest hay Neural Networks). Bản thân mô hình này rất phức tạp và lầm lì, nên chúng ta cần một "vị bác sĩ tâm lý" bên thứ ba để vào cuộc và giải mã. |
 
+</div>
+
 **Phạm vi áp dụng:**
+
+<div align="center">
 
 | Loại       | Mô tả                                                                                   |
 | ---------- | --------------------------------------------------------------------------------------- |
 | **Global** | Cho biết mô hình "ưu tiên" điều gì trên toàn bộ dữ liệu — hiểu tính nết tổng thể của AI |
 | **Local**  | "Soi" đúng tình huống cụ thể — giải thích tại sao mô hình đưa ra một dự đoán riêng lẻ   |
+
+</div>
 
 ### 4. SHAP
 
