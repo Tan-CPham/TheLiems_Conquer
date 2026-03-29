@@ -259,7 +259,7 @@ Vẫn dùng công thức nội suy như SMOTE gốc:
 
 | Công thức                                           | Ý nghĩa                       |
 | --------------------------------------------------- | ----------------------------- |
-| $$ x*{new_continuous} = x_i + λ × (x*{zi} - x_i) $$ | Nội suy tuyến tính giữa 2 mẫu |
+| $$ x_{new\_continuous} = x_i + \lambda \times (x_{zi} - x_i) $$ | Nội suy tuyến tính giữa 2 mẫu |
 
 **3. Tạo mẫu mới cho biến phân loại:**
 Thay vì nội suy, SMOTE-NC dùng nguyên tắc **Majority Vote** — giá trị của biến phân loại cho mẫu mới sẽ là giá trị xuất hiện **nhiều nhất (mode)** trong số k láng giềng gần nhất.
@@ -331,7 +331,7 @@ Theo **Chip Huyen** trong _Designing Machine Learning Systems_ (trang 142):
 
 > _"A feature's importance to a model is measured by how much that model's performance deteriorates if that feature or a set of features containing that feature is removed from the model."_
 >
-> 🇻🇳 "Tầm quan trọng của một đặc trưng được đo bằng mức độ mà hiệu suất của mô hình giảm đi khi ta loại bỏ đặc trưng đó (hoặc loại bỏ một nhóm đặc trưng có chứa nó)."
+> _(tạm dịch: "Tầm quan trọng của một đặc trưng được đo bằng mức độ mà hiệu suất của mô hình giảm đi khi ta loại bỏ đặc trưng đó (hoặc loại bỏ một nhóm đặc trưng có chứa nó).")_
 
 Nói cách khác, nếu bỏ một đặc trưng mà mô hình vẫn hoạt động tốt và ổn định thì đặc trưng đó không quan trọng — và ngược lại.
 
@@ -417,7 +417,7 @@ Kernel SHAP xấp xỉ giá trị Shapley bằng cách kết hợp **Lý thuyế
   <p><i>Hình 11: Cơ chế hoạt động của Kernel SHAP (Nguồn: Slide bài giảng AIO_XAI_SHAP) </i></p>
 </div>
 
-> ✅ **Khi nào dùng Kernel SHAP:** Khi đối mặt với mô hình "lạ" hoặc không phải dạng cây — Kernel SHAP là công cụ đáng tin cậy nhất để mang lại tính minh bạch.
+> ***Khi nào dùng Kernel SHAP:*** Khi đối mặt với mô hình "lạ" hoặc không phải dạng cây — Kernel SHAP là công cụ đáng tin cậy nhất để mang lại tính minh bạch.
 
 #### **4.3. Tree SHAP**
 
@@ -427,7 +427,7 @@ Tree SHAP được thiết kế đặc biệt để tính giá trị Shapley cho
 2. **Trọng số đường đi:** Tại mỗi nút quyết định, nếu đặc trưng "bị tắt", thuật toán tính trung bình trọng số của cả hai nhánh dựa trên số lượng mẫu đi qua trong lúc huấn luyện.
 3. **Tổng hợp:** Tổng hợp đóng góp từ tất cả các cây trong mô hình Ensemble để ra con số cuối cùng.
 
-> ✅ **Khi nào dùng Tree SHAP:** Dữ liệu dạng bảng (Tabular) với mô hình **Random Forest, XGBoost, LightGBM, CatBoost, Decision Tree**, đặc biệt khi cần giải thích toàn cục (Global).
+> ***Khi nào dùng Tree SHAP:*** Dữ liệu dạng bảng (Tabular) với mô hình **Random Forest, XGBoost, LightGBM, CatBoost, Decision Tree**, đặc biệt khi cần giải thích toàn cục (Global).
 
 ### 5. Áp dụng SHAP cho bài toán HR Attrition
 
@@ -574,4 +574,4 @@ AIO Conquer: https://aioconquer.aivietnam.edu.vn/posts/project-warmup-dot-1-du-b
 
 ## Mã nguồn tham khảo
 
-- Link: [⭐ Source Code](https://drive.google.com/drive/folders/1t5Ci3robdkT4bXtKO-g8qTODO67r3Yzx)
+- Link: [Source Code](https://drive.google.com/drive/folders/1t5Ci3robdkT4bXtKO-g8qTODO67r3Yzx)
