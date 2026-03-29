@@ -45,7 +45,7 @@ else:
 
 **Kết quả:**
 
-<center>
+<div align="center">
 
 | Hạng mục     | Kết quả  |
 | ------------ | -------- |
@@ -55,9 +55,9 @@ else:
 | Duplicate    | Không có |
 
 
-</center>
+</div>
 
-<center>
+<div align="center">
 
 | Logic Check                              | Số vi phạm |
 | ---------------------------------------- | ---------- |
@@ -68,7 +68,7 @@ else:
 | Age < 18                                 | 0 row(s)   |
 | MonthlyIncome ≤ 0                        | 0 row(s)   |
 
-</center>
+</div>
 
 #### **1.2. Kiểm tra Outliers**
 
