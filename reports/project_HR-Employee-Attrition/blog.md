@@ -1,4 +1,4 @@
-## Motivation
+## Tổng quan
 
 Với **[Project Warmup Đợt 1: Dự báo rủi ro nghỉ việc của nhân sự](https://aioconquer.aivietnam.edu.vn/posts/project-warmup-dot-1-du-bao-rui-ro-nghi-viec-cua-nhan-su)** , nhóm em đã xây dựng mô hình **Random Forest và Logistic Regression** để dự báo attrition và nhận ra rằng việc sử dụng dataset IBM chưa được xử lý kỹ đã khiến hiệu suất mô hình bị giới hạn đáng kể (**Trash in - Trash out**).
 
