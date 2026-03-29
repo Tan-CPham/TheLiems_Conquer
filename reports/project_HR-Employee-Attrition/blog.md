@@ -257,8 +257,8 @@ Vì không thể dùng khoảng cách Euclidean thuần túy cho biến phân lo
 **2. Tạo mẫu mới cho biến số:**
 Vẫn dùng công thức nội suy như SMOTE gốc:
 
-| Công thức                                           | Ý nghĩa                       |
-| --------------------------------------------------- | ----------------------------- |
+| Công thức                                                             | Ý nghĩa                       |
+| --------------------------------------------------------------------- | ----------------------------- |
 | $$x_{\mathrm{new_continuous}} = x_i + \lambda \times (x_{zi} - x_i)$$ | Nội suy tuyến tính giữa 2 mẫu |
 
 **3. Tạo mẫu mới cho biến phân loại:**
@@ -417,7 +417,7 @@ Kernel SHAP xấp xỉ giá trị Shapley bằng cách kết hợp **Lý thuyế
   <p><i>Hình 11: Cơ chế hoạt động của Kernel SHAP (Nguồn: Slide bài giảng AIO_XAI_SHAP) </i></p>
 </div>
 
-> ***Khi nào dùng Kernel SHAP:*** Khi đối mặt với mô hình "lạ" hoặc không phải dạng cây — Kernel SHAP là công cụ đáng tin cậy nhất để mang lại tính minh bạch.
+> **_Khi nào dùng Kernel SHAP:_** Khi đối mặt với mô hình "lạ" hoặc không phải dạng cây — Kernel SHAP là công cụ đáng tin cậy nhất để mang lại tính minh bạch.
 
 #### **4.3. Tree SHAP**
 
@@ -427,7 +427,7 @@ Tree SHAP được thiết kế đặc biệt để tính giá trị Shapley cho
 2. **Trọng số đường đi:** Tại mỗi nút quyết định, nếu đặc trưng "bị tắt", thuật toán tính trung bình trọng số của cả hai nhánh dựa trên số lượng mẫu đi qua trong lúc huấn luyện.
 3. **Tổng hợp:** Tổng hợp đóng góp từ tất cả các cây trong mô hình Ensemble để ra con số cuối cùng.
 
-> ***Khi nào dùng Tree SHAP:*** Dữ liệu dạng bảng (Tabular) với mô hình **Random Forest, XGBoost, LightGBM, CatBoost, Decision Tree**, đặc biệt khi cần giải thích toàn cục (Global).
+> **_Khi nào dùng Tree SHAP:_** Dữ liệu dạng bảng (Tabular) với mô hình **Random Forest, XGBoost, LightGBM, CatBoost, Decision Tree**, đặc biệt khi cần giải thích toàn cục (Global).
 
 ### 5. Áp dụng SHAP cho bài toán HR Attrition
 
@@ -549,27 +549,35 @@ Dự án đã chuyển đổi mô hình dự báo rủi ro nghỉ việc từ ph
 ## Tài liệu tham khảo
 
 [1] N. V. Chawla, K. W. Bowyer, L. O. Hall, and W. P. Kegelmeyer, "SMOTE: synthetic minority over-sampling technique," _J. Artif. Intell. Res._, Jun. 2002.
+
 Xem tại: https://doi.org/10.1613/jair.953
 
 [2] L. Xu, M. Skoularidou, A. Cuesta-Infante, and K. Veeramachaneni, "Modeling tabular data using conditional GAN," in _Advances in Neural Information Processing Systems_, 2019, vol. 32.
+
 Xem tại: https://arxiv.org/abs/1907.00503
 
 [3] V. Kovanović, S. Joksimović, and G. Siemens, "Explaining a probabilistic prediction on the simplex with Shapley compositions," _Nature Machine Intelligence_ Jan. 2024.
+
 Xem tại: https://arxiv.org/abs/2408.01382
 
 [4] A. J. Barda, J. W. Gichoya, and S. Purkayastha, "Mind the XAI Gap: A Human-Centered LLM Framework for Democratizing Explainable AI," _arXiv preprint arXiv:2404.14535_, 2024.
+
 Xem tại: [https://arxiv.org/abs/2404.14535](https://arxiv.org/abs/2404.14535)
 
 [5] V. Kovanović, S. Joksimović, and G. Siemens, "Explaining a probabilistic prediction on the simplex with Shapley compositions," _Nature Machine Intelligence_, Jan. 2024.
+
 Xem tại: [https://arxiv.org/html/2408.01382v1#S1](https://arxiv.org/html/2408.01382v1#S1)
 
 [6] Truong-Binh Duong, Nguyen-Phuc Thinh. , và Dinh-Quang Vinh (2025), "XAI Introduction: LIME and ANCHOR,".
+
 AIO Tutorial: https://tutorial.aivietnam.edu.vn/pdf/39/info
 
 [7] L.H.Anh Duy (2025) "Explainable AI với SHAP: Từ lý thuyết đến ứng dụng".
+
 AIO Conquer: https://aioconquer.aivietnam.edu.vn/posts/report-giai-thuat-shap-trong-explainable-ai
 
 [8] L.D.Hoang, N.X.Tien, T.T.Tai, P.C.Tan (2026) "Dự báo rủi ro nghỉ việc của nhân sự".
+
 AIO Conquer: https://aioconquer.aivietnam.edu.vn/posts/project-warmup-dot-1-du-bao-rui-ro-nghi-viec-cua-nhan-su
 
 ## Mã nguồn tham khảo
